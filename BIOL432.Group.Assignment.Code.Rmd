@@ -16,5 +16,9 @@ library(ggplot2)
 ```{r}
 LadyBugData <- read.csv("BIOL432.Data.GroupProject.csv")
 ```
+## Visualise Raw Data
 
+```{r}
+head(LadyBugData)
+```
 
