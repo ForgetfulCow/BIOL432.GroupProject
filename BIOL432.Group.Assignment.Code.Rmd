@@ -5,19 +5,23 @@ date: "12/03/2021"
 output: html_document
 ---
 
+# Project Info
+
+**Date**: April 6th, 2021
+**GitHub Repository Link**: [link](https://github.com/alexrow15/BIOL432.GroupProject)
+
 ## Load Required Packages
 ```{r}
 library(dplyr)
 library(ggplot2)
 ```
 
-
 ## Load Dataset
 ```{r}
 LadyBugData <- read.csv("BIOL432.Data.GroupProject.csv")
 ```
-## Visualise Raw Data
 
+## Visualise Raw Data
 ```{r}
 head(LadyBugData)
 ```
