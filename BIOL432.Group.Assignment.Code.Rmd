@@ -1,0 +1,34 @@
+---
+title: "Group Project BIOL432"
+author: "Alexander Row - 20067626"
+date: "12/03/2021"
+output: html_document
+---
+
+## Load Required Packages
+```{r}
+library(dplyr)
+library(ggplot2)
+```
+
+
+## Load Dataset
+```{r}
+LadyBugData <- read.csv("BIOL432.Data.GroupProject.csv")
+```
+## Visualise and Investigate Raw Data
+
+```{r}
+head(LadyBugData)
+```
+
+```{r}
+tail(LadyBugData)
+```
+
+```{r}
+summary(LadyBugData) #view summary for each variable in dataset
+```
+
+
+
