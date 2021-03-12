@@ -22,3 +22,8 @@ LadyBugData <- read.csv("BIOL432.Data.GroupProject.csv")
 head(LadyBugData)
 ```
 
+```{r}
+tail(LadyBugData)
+```
+
+
