@@ -16,7 +16,7 @@ library(ggplot2)
 ```{r}
 LadyBugData <- read.csv("BIOL432.Data.GroupProject.csv")
 ```
-## Visualise Raw Data
+## Visualise and Investigate Raw Data
 
 ```{r}
 head(LadyBugData)
@@ -25,5 +25,10 @@ head(LadyBugData)
 ```{r}
 tail(LadyBugData)
 ```
+
+```{r}
+summary(LadyBugData) #view summary for each variable in dataset
+```
+
 
 
