@@ -30,4 +30,9 @@ head(LadyBugData)
 tail(LadyBugData)
 ```
 
+```{r}
+summary(LadyBugData) #view summary for each variable in dataset
+```
+
+
 
