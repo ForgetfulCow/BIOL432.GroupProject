@@ -1,13 +1,28 @@
 ---
 title: "Group Project BIOL432"
-author: "Alexander Row - 20067626"
-date: "12/03/2021"
+author: "R&B(ioinformatics)"
+date: "06/04/2021"
 output: html_document
 ---
 
 # Project Info
 
 **Date**: April 6th, 2021
+
+**Group members:**
+
+Amanda Zacharias (20043354)
+
+Arjun Augustine (20060723)
+
+Alexander Row (20067626)
+
+Yudong Liu (20020036)
+
+Cameron MacPhail (20012451)
+
+
+
 **GitHub Repository Link**: [link](https://github.com/alexrow15/BIOL432.GroupProject)
 
 ## Load Required Packages
