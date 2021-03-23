@@ -50,4 +50,72 @@ summary(LadyBugData) #view summary for each variable in dataset
 ```
 
 
+### A plot for demonstration of the custom function
+ 
+made by Cameron
+```{r}
+tempAbundancePlot <- ggplot(dat, aes(x = DOY, y = Adults)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth() +
+  facet_wrap(~ TYPE) +
+  theme_bw()
+```
+
+
+## Making A Custom Function
+
+This function will save a plot in a specified file format. File format options are pdf, png, and jpeg. File will be output to a folder called, "Output".
+
+\n
+
+For example: 
+
++ input: plot = tempAbundancePlot, file_type = .png, directory = "Folder/Filename.png", width = 5, height = 5 
++ output = a .png image of the graph that is named, "graph"
+
+```{r}
+outputFigGenerator <- function(plot_code, file_type = 0,
+                               directory="Output/name.png",
+                               fig.width = 5,
+                               fig.height = 5){
+  if (file_type == 1){
+    pdf(file = directory, width = fig.width,
+            height = fig.height)
+    plot_code
+  }
+  if (file_type == 2){
+    png(file = directory, width = fig.width,
+            height = fig.height)
+    plot_code
+  }
+  if (file_type == 3){
+    jpeg(file = directory, width = fig.width,
+            height = fig.height)
+    plot_code
+  }
+  dev.off()
+}
+```
+
+Run the function
+
+```{r}
+outputFigGenerator(plot_code = ggplot(dat, aes(x = DOY, y = Adults)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth() +
+  facet_wrap(~ TYPE) +
+  theme_bw(), file_type = 2, directory =  "Output/tempAbundancePlot.png", fig.width = 5, fig.height = 5)
+```
+
+```{r}
+png(file = "Output/tempAbundancePlot.png")
+tempAbundancePlot
+dev.off()
+```
+
+
+
+
 
