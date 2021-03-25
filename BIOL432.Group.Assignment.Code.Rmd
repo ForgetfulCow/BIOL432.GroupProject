@@ -21,12 +21,19 @@ Yudong Liu (20020036)
 
 Cameron MacPhail (20012451)
 
+**We seek to address the following questions:**
+
+1. Within sampling years, does native and non-native species abundance change according to the month?
+
+2. Is there seasonal niche partitioning among native species and among non-native species? Is there seasonal niche partitioning between native and non-native species?
+
+3. Is there a change in seasonal partitioning before and after invasive species arrive?
 
 
-**GitHub Repository Link**: [link](https://github.com/alexrow15/BIOL432.GroupProject)
+[GitHub Repository Link](https://github.com/alexrow15/BIOL432.GroupProject)
 
 ## Load Required Packages
-```{r}
+```{r message=F}
 library(dplyr)
 library(ggplot2)
 ```
