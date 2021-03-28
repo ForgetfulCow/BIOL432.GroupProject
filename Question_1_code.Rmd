@@ -44,25 +44,6 @@ Clearly abundance does vary over time, but not necessarily exactly according to 
 
 ## Temporal abundance of native vs non-native ladybeetles
 
-Table 1. List of native and non-native species in the dataset
---------------------------------------------------------------------
-Species                       | Species Code | Native or Non-native?
-------------------------------|-------------------------------------
-Adalia bipunctata             | ABIPN        | Native
-Coleomegilla maculata         | CMAC         | Native
-Chilocorus stigma             | CSTIG        | Native
-Coccinella trifasciata        | CTRIF        | Native
-Cycloneda munda               | CMUND        | Native
-Hippodamia convergens         | HCONV        | Native
-Hippodamia glacialis          | HGLAC        | Native
-Hippodamia parenthesis        | HPARN        | Native
-Hippodamia tredecimpunctata   | HTRE         | Native
-Coccinella septempunctata     | CSEPT        | Non-native
-Harmonia axyridis             | HAXY         | Non-native
-Hippodamia variegata          | HVAR         | Non-native
-Propylea quatuordecimpunctata | PQUA         | Non-native
-
-
 Creating native and non-native groups
 ```{r}
 # Create another column in the dataset that assigns non-native species to the 'Non-native' group and assign all other species to the 'Native' group
