@@ -17,6 +17,7 @@ Loading packages
 ```{r, echo = FALSE}
 library(ggplot2)
 library(dplyr)
+library(tidyr)
 ```
 
 Importing Data
@@ -78,6 +79,9 @@ dat %>%
 ```
 Native species are already low in abundance by this point, but seem to do well during the shoulder seasons.
 
+```{r}
+```
+
 
 1994 - 1998: two non-native ladybeetles
 ```{r}
@@ -126,4 +130,10 @@ That pattern of mid to late season niche partitioning becomes very apparent in a
 ## Conclusion
 
 Overall, abundance certainly varies over time and we see some evidence for niche partitioning at this stage. Invasion of new species also definitely has an impact on patterns.
+
+
+## Question 2: Is there seasonal niche partitioning among native species and among non-native species? Is there seasonal niche partitioning between native and non-native species?
+
+
+
 
