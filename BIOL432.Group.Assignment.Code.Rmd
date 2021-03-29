@@ -21,6 +21,59 @@ Yudong Liu (20020036)
 
 Cameron MacPhail (20012451)
 
+## Dataset Description 
+  The original dataset selected was published by [Bahlai et al. (2014)](https://link-springer-com.proxy.queensu.ca/article/10.1007/s10530-014-0772-4#Sec2) and used data from a multi-year study conducted on a ladybeetle (Coccinellidae) community in southwestern Michigan. The study aimed to elucidate the mechanism behind the decline of native Coccinellidae species and generate potential conservation strategies. 
+  Data were collected in southern Michigan on an experimental farm and forest area. Forest sampling began in 1993, so data before this time does not include the forest community classification. Adult coccinellids were captured using un-baited yellow sticky pads suspended in the air. As this sampling technique may be more efficient in some habitats than other habitats, we will focus our analysis within habitat types to minimize bias. The time period covered by this dataset includes several important ecological events, including the introduction of non-native competitors (alien coccinellid species) and prey (soybean aphids).
+	The first, second and third variables describe collection dates in the form of year; day, month and year (DD-Month-YYYY); and ordinal day of the year, respectively. The fourth variable describes how the plot was managed (e.g. conventional tilling, organic, etc.), if at all. The fifth variable records the habitat type (i.e. the plant community growing in the plot). This differs from the management treatment due to crop rotation. The sixth variable is the plant community classification (annual, perennial, or forest). The seventh variable is the plot replicate number. The eighth variable is the sample station number; there are five stations per plot. The ninth variable is the species ID; there are 13 species in total. Finally, the tenth variable describes the total number of adults captured in a subsample during a week. See Table 1 for a better understanding of the variables within the dataset.
+	Bahlai et al. (2014) concluded that the decreasing abundance of native Coccinellidae species was due to competitive exploitation driven by dietary overlap with alien Coccinellidae species. Our project will examine whether seasonal niche partitioning is occurring among and between native and non-native coccinellids.
+	
+There are 13 species of Ladybeetle documented in this study. 9 species are native, while the remaining 4 are non-native invase species. 
+## Native species
+
+1. Two Spot ladybird - Adalia bipunctata
+![A.bipunctata](A. bipunctata.jpeg)
+
+2. Spotted Lady Beetle - Coleomegilla maculata 
+![C. maculata](C. maculata.jpeg)
+
+3. Twice stabbed ladybug - Chilocorus stigma
+![C. stigma](C.stigma.jpeg)
+
+4. Three-banded ladybeetle - Coccinella trifasciata
+![C. trifasciata](C.trifasciata.jpeg)
+
+5. Polished/spotless ladybeetle - Cycloneda munda
+![C. munda](C. munda.jpeg)
+
+6. Convergent ladybeetle - Hippodamia convergens
+![H. convergens](H. convergens.jpeg)
+
+7. Glacial ladybeetle - Hippodamia glacialis
+![H. glacialis](H.glacialis.jpeg)
+
+8. Parenthesis ladybeetle - Hippodamia parenthesis
+![H. parenthesis](H. parenthesis.jpeg)
+
+9. Thirteen-spot ladybeetle - Hippodamia tredecimpunctata
+![H. tredecimpunctata](H.tredecimpunctata.jpeg)
+
+
+
+## Non-native Invasive Species
+
+1. Seven-spot ladybeetle - Coccinella septempunctata
+![C. septempunctata](C. septempunctata.jpeg)
+
+2. Harlequin/Asian ladybeetle - Harmonia axyridis
+![H. axyridis](H.axyridis.jpeg)
+
+3. Variegated ladybeetle - Hippodamia variegata
+![H. variegata](H. variegata.jpeg)
+
+4. 14-spotted ladybeetle - Propylea quatuordecimpunctata
+![P. quatuordecimpunctata](P.quatuordecimpunctata.jpeg)
+
+
 **We seek to address the following questions:**
 
 1. Within sampling years, does native and non-native species abundance change according to the month?
@@ -60,7 +113,7 @@ tail(LadyBugData)
 ```{r}
 summary(LadyBugData) #view summary for each variable in dataset
 ```
-=======
+
 
 # Is there temporal niche partitioning among native species and among non-native species? Is there temporal niche partitioning between native and non-native species?
 
