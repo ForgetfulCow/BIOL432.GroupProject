@@ -11,12 +11,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Question 1
 
-###Within sampling years, does native and non-native species abundance change according to the month?
+### Within sampling years, does native and non-native species abundance change according to the month?
 
 Loading packages
 ```{r, echo = FALSE}
 library(ggplot2)
 library(dplyr)
+library(tidyr)
 ```
 
 Importing Data
@@ -29,7 +30,7 @@ The dates loaded in correctly, which is good.
 
 ## General temporal abundance patterns
 
-So, does abundance vary at all over time?
+Plot ladybeetle abundance against the day of the year to determine if abundance varies at all over time. Display this data separately for each individual habitat type (annual, forest, perennial) because the sampling method used to capture the ladybeetles may have been more efficient in some habitats than other habitats *(find Bahlai et al 2013 and cite it)*.
 ```{r}
 ggplot(dat, aes(x = DOY, y = Adults)) +
   scale_x_continuous(expand = c(0,0)) +
@@ -39,16 +40,20 @@ ggplot(dat, aes(x = DOY, y = Adults)) +
   theme_bw()
 ```
 
+
 Clearly abundance does vary over time, but not necessarily exactly according to month. Let's examine how well this pattern holds for individual species as well as native vs non-native assemblages.
+
+## Temporal abundance of native vs non-native ladybeetles
 
 Creating native and non-native groups
 ```{r}
+# Create another column in the dataset that assigns non-native species to the 'Non-native' group and assign all other species to the 'Native' group
 dat <- dat %>%
-  mutate(Species_type = ifelse(SpeciesID == "CSEPT" |  SpeciesID == "HAXY" | SpeciesID == "HVAR" | SpeciesID == "PQUA", "Non-native", "Native"))
+  mutate(Species_type = ifelse(SpeciesID == "CSEPT" |  SpeciesID == "HAXY" | SpeciesID == "HVAR" |
+                                 SpeciesID == "PQUA",
+                               "Non-native", "Native"))
 ```
 
-
-## Temporal abundance of native vs non-native ladybeetles
 
 Plotting abundance w/ native and non-native groupings
 ```{r}
@@ -60,7 +65,9 @@ ggplot(dat, aes(x = DOY, y = Adults, colour = Species_type)) +
   theme_bw()
 ```
 
-Non-native ladybeetles clearly have higher abundance throughout the entire year in most habitats. There doesn't seem to be strong patterns in forest habitat for native ladybeetles, but this might just be because they have such low abundance. Taking a look at abundance pre-invasion of the various exotic species should help show what's going on. Also, in several habitats there seems to be a decline in non-native ladybeetle abundance and a concurrent increase in native ladybeetle abundance around 2/3 of the way through the year, lending support to our hypothesis of temporal niche partitioning.
+Non-native ladybeetles clearly have higher abundance throughout the entire year in most habitats. There doesn't seem to be strong patterns in forest habitat for native ladybeetles, but this might just be because they have such low abundance. Taking a look at abundance pre-invasion of the various exotic species should help show what's going on.
+
+Also, in annual crop habitats there seems to be a decline in non-native ladybeetle abundance and a concurrent increase in native ladybeetle abundance around 2/3 of the way through the year, lending support to our hypothesis of temporal niche partitioning.
 
 
 ## Pre-invasion temporal abundance patterns
@@ -68,7 +75,7 @@ Non-native ladybeetles clearly have higher abundance throughout the entire year 
 1989 - 1993: one non-native ladybeetles
 ```{r}
 dat %>%
-  filter(Year == c(1989:1993), TYPE != "forest") %>% #filtering desired years and removing forest data (forest site only started getting sampled in 1993, not enough data for this time frame)
+  filter(Year == c(1989:1993), TYPE != "forest") %>% # Filter the desired years and remove forest data (forest site only started getting sampled in 1993, so there is not enough data for this time frame)
   ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
   scale_x_continuous(expand = c(0,0)) +
   scale_y_continuous(expand = c(0,0)) +
@@ -76,22 +83,39 @@ dat %>%
   facet_wrap(~ TYPE) +
   theme_bw()
 ```
-Native species are already low in abundance by this point, but seem to do well during the shoulder seasons.
+Native species are already low in abundance by this point, but seem to do well at the beginning and end of growing seasons.
+
+```{r}
+```
 
 
 1994 - 1998: two non-native ladybeetles
 ```{r}
 dat %>%
-  filter(Year == c(1994:1998)) %>% #filtering desired years
+  filter(Year == c(1994:1998)) %>% # Filtering desired years, forests were present by this time period so they are left in the dataset
   ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
   scale_x_continuous(expand = c(0,0)) +
   scale_y_continuous(expand = c(0,0)) +
-  geom_smooth() +
+  geom_smooth(method = "gam") +
   facet_wrap(~ TYPE) +
   theme_bw()
 ```
 
-Very interesting change in pattern for annual crops. Graphing by individual species (replace "Species_type" with "SpeciesID") shows that the increase in native abundance of is driven almost entirely by one species.
+There is a very interesting change in abundance patterns for annual crops. There is now a second peak in abundance on non-native species at the end of the growing season.
+
+Graphing by individual species (replace "Species_type" with "SpeciesID") shows that the increase in native abundance of is driven almost entirely by one species:
+```{r}
+dat$Adults <- as.numeric(dat$Adults)
+dat %>%
+  filter(Year == c(1994:1998)) %>% # Filtering desired years, forests were present by this time period so they are left in the dataset
+  ggplot(aes(x = DOY, y = Adults, colour = SpeciesID)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "loess") +
+  facet_wrap(~ TYPE) +
+  theme_bw()
+```
+
 
 
 1999 - 2006: three non-native ladybeetles + soybean aphid outbreaks
@@ -122,7 +146,31 @@ dat %>%
 
 That pattern of mid to late season niche partitioning becomes very apparent in annual cropland. Potentially related to agricultural activities (e.g. harvest)? Digging into the patterns for specific treatment types might explain more.
 
+```{r}
+dat %>% filter(TYPE == "annual", Year == c(2007:2012)) %>% 
+  ggplot(aes(x = DOY, y = Adults, colour = TREAT_DESC)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "loess", span = 1, se = F) +
+  facet_wrap(~ TYPE) +
+  theme_bw()
+```
+
+
 
 ## Conclusion
 
 Overall, abundance certainly varies over time and we see some evidence for niche partitioning at this stage. Invasion of new species also definitely has an impact on patterns.
+
+
+<<<<<<< HEAD
+## Question 2: Is there seasonal niche partitioning among native species and among non-native species? Is there seasonal niche partitioning between native and non-native species?
+
+
+
+
+=======
+Tree or NMDS:
+Can cluster by abundace data for subsets of time of year
+Maybe I can see how native and non-native species cluster based off differences in DOY? (question 2)
+>>>>>>> 90fb3d3787cd48bda599552106312f03c8580c07
