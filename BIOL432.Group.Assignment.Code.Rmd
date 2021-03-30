@@ -32,47 +32,48 @@ There are 13 species of Ladybeetle documented in this study. 9 species are nativ
 
 ## Native species
 
-1. Two Spot ladybird - Adalia bipunctata
+1. Two Spot ladybird - [Adalia bipunctata](https://en.wikipedia.org/wiki/Adalia_bipunctata)
 ![A.bipunctata](Images/A. bipunctata.jpeg)
 
-2. Spotted Lady Beetle - Coleomegilla maculata 
+
+2. Spotted Lady Beetle - [Coleomegilla maculata](https://biocontrol.entomology.cornell.edu/predators/Coleomegilla.php) 
 ![C. maculata](Images/C. maculata.jpeg)
 
-3. Twice stabbed ladybug - Chilocorus stigma
+3. Twice stabbed ladybug - [Chilocorus stigma](https://www.discoverlife.org/mp/20q?search=Chilocorus+stigma)
 ![C. stigma](Images/C.stigma.jpeg)
 
-4. Three-banded ladybeetle - Coccinella trifasciata
+4. Three-banded ladybeetle - [Coccinella trifasciata](https://www.discoverlife.org/mp/20q?search=Coccinella+trifasciata)
 ![C. trifasciata](Images/C.trifasciata.jpeg)
 
-5. Polished/spotless ladybeetle - Cycloneda munda
+5. Polished/spotless ladybeetle - [Cycloneda munda](https://bugguide.net/node/view/472564)
 ![C. munda](Images/C. munda.jpeg)
 
-6. Convergent ladybeetle - Hippodamia convergens
+6. Convergent ladybeetle - [Hippodamia convergens](https://en.wikipedia.org/wiki/Hippodamia_convergens)
 ![H. convergens](Images/H. convergens.jpeg)
 
-7. Glacial ladybeetle - Hippodamia glacialis
+7. Glacial ladybeetle - [Hippodamia glacialis](https://www.discoverlife.org/mp/20q?search=Hippodamia+glacialis)
 ![H. glacialis](Images/H.glacialis.jpeg)
 
-8. Parenthesis ladybeetle - Hippodamia parenthesis
+8. Parenthesis ladybeetle -[ Hippodamia parenthesis](https://www.discoverlife.org/mp/20q?search=Hippodamia+parenthesis&guide=Ladybug&cl=llp)
 ![H. parenthesis](Images/H. parenthesis.jpeg)
 
-9. Thirteen-spot ladybeetle - Hippodamia tredecimpunctata
+9. Thirteen-spot ladybeetle - [Hippodamia tredecimpunctata](https://www.jungledragon.com/specie/13740/thirteen-spot_ladybird.html)
 ![H. tredecimpunctata](Images/H.tredecimpunctata.jpeg)
 
 
 
 ## Non-native Invasive Species
 
-1. Seven-spot ladybeetle - Coccinella septempunctata
+1. Seven-spot ladybeetle - [Coccinella septempunctata](https://kids.kiddle.co/Coccinella_septempunctata)
 ![C. septempunctata](Images/C. septempunctata.jpeg)
 
-2. Harlequin/Asian ladybeetle - Harmonia axyridis
+2. Harlequin/Asian ladybeetle - [Harmonia axyridis](https://davesgarden.com/guides/bf/go/4139/#b)
 ![H. axyridis](Images/H.axyridis.jpeg)
 
-3. Variegated ladybeetle - Hippodamia variegata
+3. Variegated ladybeetle - [Hippodamia variegata](https://bugguide.net/node/view/352609)
 ![H. variegata](Images/H. variegata.jpeg)
 
-4. 14-spotted ladybeetle - Propylea quatuordecimpunctata
+4. 14-spotted ladybeetle - [Propylea quatuordecimpunctata](https://www.inaturalist.org/taxa/61532-Propylea-quatuordecimpunctata)
 ![P. quatuordecimpunctata](Images/P.quatuordecimpunctata.jpeg)
 
 
@@ -104,7 +105,6 @@ There are 13 species of Ladybeetle documented in this study. 9 species are nativ
 
 3. If there is a change in seasonal partitioning before and after invasive species (soybean aphids) arrive, then graphs and community clusters will show changes in temporal niche partitioning. For example, non-native species may be at a high abundance during a month when they were previously low abundance. 
 
-\n 
 
 [GitHub Repository Link](https://github.com/alexrow15/BIOL432.GroupProject)
 
@@ -290,7 +290,7 @@ logTLadyBug <- LadyBugData %>%
 # Could add a step here to split the dataset into subsets for relevant time periods. Would have to do the following steps separately for each time period.
 
 # Pool the abundance data for station, plot, treatment, across the years within groups of DOY + SpeciesID + TYPE
-datAbunSum <- logTLadyBug %>% group_by(DOY, SpeciesID, TYPE) %>% summarize(SumAbun = sum(logTAdults, na.rm = T))
+datAbunSum <- logTLadyBug %>% group_by(DOY, SpeciesID, TYPE) %>% summarize(SumAbun = sum(logTAdults, na.rm = TRUE))
 
 # Make matrices of species abundances where the rows are the individual species and the columns are days of the year (DOY) for each habitat type
 
@@ -513,10 +513,6 @@ LadyBugData %>%
   theme_bw()
 ```
 Native species are already low in abundance by this point, but seem to do well at the beginning and end of growing seasons.
-
-```{r}
-```
-
 
 1994 - 1998: two non-native ladybeetles
 ```{r}
