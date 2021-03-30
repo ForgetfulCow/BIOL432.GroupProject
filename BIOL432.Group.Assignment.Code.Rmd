@@ -32,47 +32,48 @@ There are 13 species of Ladybeetle documented in this study. 9 species are nativ
 
 ## Native species
 
-1. Two Spot ladybird - Adalia bipunctata
+1. Two Spot ladybird - [Adalia bipunctata](https://en.wikipedia.org/wiki/Adalia_bipunctata)
 ![A.bipunctata](Images/A. bipunctata.jpeg)
 
-2. Spotted Lady Beetle - Coleomegilla maculata 
+
+2. Spotted Lady Beetle - [Coleomegilla maculata](https://biocontrol.entomology.cornell.edu/predators/Coleomegilla.php) 
 ![C. maculata](Images/C. maculata.jpeg)
 
-3. Twice stabbed ladybug - Chilocorus stigma
+3. Twice stabbed ladybug - [Chilocorus stigma](https://www.discoverlife.org/mp/20q?search=Chilocorus+stigma)
 ![C. stigma](Images/C.stigma.jpeg)
 
-4. Three-banded ladybeetle - Coccinella trifasciata
+4. Three-banded ladybeetle - [Coccinella trifasciata](https://www.discoverlife.org/mp/20q?search=Coccinella+trifasciata)
 ![C. trifasciata](Images/C.trifasciata.jpeg)
 
-5. Polished/spotless ladybeetle - Cycloneda munda
+5. Polished/spotless ladybeetle - [Cycloneda munda](https://bugguide.net/node/view/472564)
 ![C. munda](Images/C. munda.jpeg)
 
-6. Convergent ladybeetle - Hippodamia convergens
+6. Convergent ladybeetle - [Hippodamia convergens](https://en.wikipedia.org/wiki/Hippodamia_convergens)
 ![H. convergens](Images/H. convergens.jpeg)
 
-7. Glacial ladybeetle - Hippodamia glacialis
+7. Glacial ladybeetle - [Hippodamia glacialis](https://www.discoverlife.org/mp/20q?search=Hippodamia+glacialis)
 ![H. glacialis](Images/H.glacialis.jpeg)
 
-8. Parenthesis ladybeetle - Hippodamia parenthesis
+8. Parenthesis ladybeetle -[ Hippodamia parenthesis](https://www.discoverlife.org/mp/20q?search=Hippodamia+parenthesis&guide=Ladybug&cl=llp)
 ![H. parenthesis](Images/H. parenthesis.jpeg)
 
-9. Thirteen-spot ladybeetle - Hippodamia tredecimpunctata
+9. Thirteen-spot ladybeetle - [Hippodamia tredecimpunctata](https://www.jungledragon.com/specie/13740/thirteen-spot_ladybird.html)
 ![H. tredecimpunctata](Images/H.tredecimpunctata.jpeg)
 
 
 
 ## Non-native Invasive Species
 
-1. Seven-spot ladybeetle - Coccinella septempunctata
+1. Seven-spot ladybeetle - [Coccinella septempunctata](https://kids.kiddle.co/Coccinella_septempunctata)
 ![C. septempunctata](Images/C. septempunctata.jpeg)
 
-2. Harlequin/Asian ladybeetle - Harmonia axyridis
+2. Harlequin/Asian ladybeetle - [Harmonia axyridis](https://davesgarden.com/guides/bf/go/4139/#b)
 ![H. axyridis](Images/H.axyridis.jpeg)
 
-3. Variegated ladybeetle - Hippodamia variegata
+3. Variegated ladybeetle - [Hippodamia variegata](https://bugguide.net/node/view/352609)
 ![H. variegata](Images/H. variegata.jpeg)
 
-4. 14-spotted ladybeetle - Propylea quatuordecimpunctata
+4. 14-spotted ladybeetle - [Propylea quatuordecimpunctata](https://www.inaturalist.org/taxa/61532-Propylea-quatuordecimpunctata)
 ![P. quatuordecimpunctata](Images/P.quatuordecimpunctata.jpeg)
 
 
@@ -104,7 +105,6 @@ There are 13 species of Ladybeetle documented in this study. 9 species are nativ
 
 3. If there is a change in seasonal partitioning before and after invasive species (soybean aphids) arrive, then graphs and community clusters will show changes in temporal niche partitioning. For example, non-native species may be at a high abundance during a month when they were previously low abundance. 
 
-\n 
 
 [GitHub Repository Link](https://github.com/alexrow15/BIOL432.GroupProject)
 
@@ -137,6 +137,26 @@ tail(LadyBugData)
 summary(LadyBugData) #view summary for each variable in dataset
 ```
 
+## Making A Custom Function
+
+This function will create a custom theme for our ggplots. 
+
+```{r}
+theme_custom <- function () {
+  # Using theme_minimal as a base. Will replace elements that we want to change.
+  theme_minimal() %+replace% 
+  theme(
+    # Changing grid elements
+    axis.ticks = element_line(colour = "black"), 
+    # Changing axis text
+    axis.text = element_text(size = rel(0.8), colour="black"),
+    # Changing facet title text
+    strip.text = element_text(size = rel(1), colour = "black"),
+    #add an axis line 
+    axis.line = element_line(colour = 'black', size = 1)
+  )
+}
+```
 
 # Is there temporal niche partitioning among native species and among non-native species? Is there temporal niche partitioning between native and non-native species?
 
@@ -188,6 +208,14 @@ LadyBugData <- changeID(LadyBugData, "HVAR", "H. variegata")
 LadyBugData <- changeID(LadyBugData, "PQUA", "P. quatuordecimpunctata")
 ```
 
+Creating native and non-native groups
+```{r}
+# Create another column in the dataset that assigns non-native species to the 'Non-native' group and assign all other species to the 'Native' group
+LadyBugData <- LadyBugData %>%
+  mutate(Species_type = ifelse(SpeciesID == "C. septempunctata" |  SpeciesID == "H. axyridis" | SpeciesID == "H. variegata" |
+                                 SpeciesID == "P. quatuordecimpunctata",
+                               "Non-native", "Native"))
+```
 ##### Make sure to subset by invasion period and aphid outbreak period later
 
 
@@ -211,7 +239,7 @@ ggplot(LadyBugData, aes(x=Adults, y=..count..))+
 ```
 There is a wide range in abundances. From Cameron's graphs, non-native species are much more abundant than native species. To get an idea of how often each species is represented in the dataset:
 ```{r}
-# Sum up the DOY abundnaces for each species
+# Sum up the DOY abundances for each species
 LadyBugData %>% group_by(SpeciesID) %>% summarise(totalAbun = sum(Adults, na.rm = TRUE))
 ```
 #Certain species are indeed far more common in the dataset than others.
@@ -262,7 +290,7 @@ logTLadyBug <- LadyBugData %>%
 # Could add a step here to split the dataset into subsets for relevant time periods. Would have to do the following steps separately for each time period.
 
 # Pool the abundance data for station, plot, treatment, across the years within groups of DOY + SpeciesID + TYPE
-datAbunSum <- logTLadyBug %>% group_by(DOY, SpeciesID, TYPE) %>% summarize(SumAbun = sum(logTAdults, na.rm = T))
+datAbunSum <- logTLadyBug %>% group_by(DOY, SpeciesID, TYPE) %>% summarize(SumAbun = sum(logTAdults, na.rm = TRUE))
 
 # Make matrices of species abundances where the rows are the individual species and the columns are days of the year (DOY) for each habitat type
 
@@ -287,7 +315,7 @@ PFdat <- melt(as.matrix(forest.dist))
 ggplot(data = PFdat, aes(x=Var1, y=Var2, fill = value)) +
   geom_tile() +
   scale_fill_gradientn(colours=c("white","blue","green","red")) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) 
 ```
 With log10 transformation all the species are really distinct from each other.
 This makes sense because taking differences in abundance into account should amplify the differences between species relative to just presence/absence.
@@ -306,7 +334,7 @@ forest.tree <- njs(forest.dist) # njs allows for missing values in the distance 
 
 ggtree(forest.tree, layout = "rectangular") %<+% SpeciesOrigin +
   geom_tiplab(aes(colour = Native)) +
-  theme(legend.position = "right")
+  theme(legend.position = "right") 
 ```
 Some notes about what happened when I tried switching log transformations:
 
@@ -332,7 +360,7 @@ metaMDS() returns the warning: 'stress is (nearly) zero: you may have insufficie
 ```{r}
 ggplot(data = forest.NMDSdat, aes(x = NMDS1, y = NMDS2)) +
   geom_point(size = 3, alpha = 0.6) +
-  theme_bw()
+  theme_custom() 
 ```
 
 ```{r}
@@ -340,7 +368,7 @@ ggplot(data = forest.NMDSdat, aes(x = NMDS1, y = NMDS2)) +
 forest.NMDSdat2 <- forest.NMDSdat %>% filter(SpeciesID != "HAXY")
 ggplot(data = forest.NMDSdat2, aes(x = NMDS1, y = NMDS2)) +
   geom_point(size = 3, alpha = 0.6) +
-  theme_bw()
+  theme_custom()
 ```
 
 It seems like the NMDS coordinates have really small variation compared to the plots from tutorials and assignments. I wonder if it might have to do with the relatively small number of pairwise comparisons made in the distance matrix (13x13=169) - at least that's my best guess from googling.
@@ -424,34 +452,137 @@ ggtree(forest.tree, layout = "rectangular") %<+% SpeciesOrigin +
 
 > It might also be worth trying the yrDOY abundance tree with the different log transformations. I don't think I tried but it's 2:00 am lol.
 
-## Making A Custom Function
 
-This function will create a custom theme for our ggplots. 
-
-```{r}
-theme_custom <- function () {
-  # Using theme_minimal as a base. Will replace elements that we want to change.
-  theme_minimal() %+replace% 
-  theme(
-    # Changing grid elements
-    axis.ticks = element_line(colour = "black"), 
-    # Changing axis text
-    axis.text = element_text(size = rel(0.8), colour="black"),
-    # Changing facet title text
-    strip.text = element_text(size = rel(1), colour = "black")
-  )
-}
-```
 
 ### A plot for demonstration of the custom function
  
 ```{r}
-tempAbundancePlot <- ggplot(dat, aes(x = DOY, y = Adults)) +
+tempAbundancePlot <- ggplot(LadyBugData, aes(x = DOY, y = Adults)) +
   scale_x_continuous(expand = c(0,0)) +
   scale_y_continuous(expand = c(0,0)) +
   geom_smooth() +
   facet_wrap(~ TYPE) +
-  theme_custom()
+  theme_bw()
 tempAbundancePlot
 ```
 
+
+## General temporal abundance patterns
+
+Plot ladybeetle abundance against the day of the year to determine if abundance varies at all over time. Display this data separately for each individual habitat type (annual, forest, perennial) because the sampling method used to capture the ladybeetles may have been more efficient in some habitats than other habitats *(find Bahlai et al 2013 and cite it)*.
+```{r}
+ggplot(LadyBugData, aes(x = DOY, y = Adults)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth() +
+  facet_wrap(~ TYPE) +
+  theme_bw()
+```
+
+
+Clearly abundance does vary over time, but not necessarily exactly according to month. Let's examine how well this pattern holds for individual species as well as native vs non-native assemblages.
+
+## Temporal abundance of native vs non-native ladybeetles
+
+Plotting abundance w/ native and non-native groupings
+```{r}
+ggplot(LadyBugData, aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth() +
+  facet_wrap(~ TYPE) +
+  theme_bw()
+```
+
+Non-native ladybeetles clearly have higher abundance throughout the entire year in most habitats. There doesn't seem to be strong patterns in forest habitat for native ladybeetles, but this might just be because they have such low abundance. Taking a look at abundance pre-invasion of the various exotic species should help show what's going on.
+
+Also, in annual crop habitats there seems to be a decline in non-native ladybeetle abundance and a concurrent increase in native ladybeetle abundance around 2/3 of the way through the year, lending support to our hypothesis of temporal niche partitioning.
+
+
+## Pre-invasion temporal abundance patterns
+
+1989 - 1993: one non-native ladybeetles
+```{r}
+LadyBugData %>%
+  filter(Year == c(1989:1993), TYPE != "forest") %>% # Filter the desired years and remove forest data (forest site only started getting sampled in 1993, so there is not enough data for this time frame)
+  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth() +
+  facet_wrap(~ TYPE) +
+  theme_bw()
+```
+Native species are already low in abundance by this point, but seem to do well at the beginning and end of growing seasons.
+
+1994 - 1998: two non-native ladybeetles
+```{r}
+LadyBugData %>%
+  filter(Year == c(1994:1998)) %>% # Filtering desired years, forests were present by this time period so they are left in the dataset
+  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_bw()
+```
+
+There is a very interesting change in abundance patterns for annual crops. There is now a second peak in abundance on non-native species at the end of the growing season.
+
+Graphing by individual species (replace "Species_type" with "SpeciesID") shows that the increase in native abundance of is driven almost entirely by one species:
+```{r}
+LadyBugData$Adults <- as.numeric(LadyBugData$Adults)
+LadyBugData %>%
+  filter(Year == c(1994:1998)) %>% # Filtering desired years, forests were present by this time period so they are left in the dataset
+  ggplot(aes(x = DOY, y = Adults, colour = SpeciesID)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "loess") +
+  facet_wrap(~ TYPE) +
+  theme_bw()
+```
+
+
+
+1999 - 2006: three non-native ladybeetles + soybean aphid outbreaks
+```{r}
+LadyBugData %>%
+  filter(Year == c(1999:2006)) %>% #filtering desired years
+  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth() +
+  facet_wrap(~ TYPE) +
+  theme_bw()
+```
+
+During this time period, a new, exotic ladybeetle species arrived and there were repeated soybean aphid outbreaks. Things get a little weird....
+
+2007 - 2012: four non-native ladybeetles + soybean aphids present
+```{r}
+LadyBugData %>%
+  filter(Year == c(2007:2012)) %>% #filtering desired years
+  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth() +
+  facet_wrap(~ TYPE) +
+  theme_bw()
+```
+
+That pattern of mid to late season niche partitioning becomes very apparent in annual cropland. Potentially related to agricultural activities (e.g. harvest)? Digging into the patterns for specific treatment types might explain more.
+
+```{r}
+LadyBugData %>% filter(TYPE == "annual", Year == c(2007:2012)) %>% 
+  ggplot(aes(x = DOY, y = Adults, colour = TREAT_DESC)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "loess", span = 1, se = F) +
+  facet_wrap(~ TYPE) +
+  theme_bw()
+```
+
+
+
+## Conclusion
+
+Overall, abundance certainly varies over time and we see some evidence for niche partitioning at this stage. Invasion of new species also definitely has an impact on patterns.
