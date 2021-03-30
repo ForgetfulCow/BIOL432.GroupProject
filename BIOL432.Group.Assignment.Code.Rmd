@@ -33,47 +33,47 @@ There are 13 species of Ladybeetle documented in this study. 9 species are nativ
 ## Native species
 
 1. Two Spot ladybird - Adalia bipunctata
-![A.bipunctata](A. bipunctata.jpeg)
+![A.bipunctata](Images/A. bipunctata.jpeg)
 
 2. Spotted Lady Beetle - Coleomegilla maculata 
-![C. maculata](C. maculata.jpeg)
+![C. maculata](Images/C. maculata.jpeg)
 
 3. Twice stabbed ladybug - Chilocorus stigma
-![C. stigma](C.stigma.jpeg)
+![C. stigma](Images/C.stigma.jpeg)
 
 4. Three-banded ladybeetle - Coccinella trifasciata
-![C. trifasciata](C.trifasciata.jpeg)
+![C. trifasciata](Images/C.trifasciata.jpeg)
 
 5. Polished/spotless ladybeetle - Cycloneda munda
-![C. munda](C. munda.jpeg)
+![C. munda](Images/C. munda.jpeg)
 
 6. Convergent ladybeetle - Hippodamia convergens
-![H. convergens](H. convergens.jpeg)
+![H. convergens](Images/H. convergens.jpeg)
 
 7. Glacial ladybeetle - Hippodamia glacialis
-![H. glacialis](H.glacialis.jpeg)
+![H. glacialis](Images/H.glacialis.jpeg)
 
 8. Parenthesis ladybeetle - Hippodamia parenthesis
-![H. parenthesis](H. parenthesis.jpeg)
+![H. parenthesis](Images/H. parenthesis.jpeg)
 
 9. Thirteen-spot ladybeetle - Hippodamia tredecimpunctata
-![H. tredecimpunctata](H.tredecimpunctata.jpeg)
+![H. tredecimpunctata](Images/H.tredecimpunctata.jpeg)
 
 
 
 ## Non-native Invasive Species
 
 1. Seven-spot ladybeetle - Coccinella septempunctata
-![C. septempunctata](C. septempunctata.jpeg)
+![C. septempunctata](Images/C. septempunctata.jpeg)
 
 2. Harlequin/Asian ladybeetle - Harmonia axyridis
-![H. axyridis](H.axyridis.jpeg)
+![H. axyridis](Images/H.axyridis.jpeg)
 
 3. Variegated ladybeetle - Hippodamia variegata
-![H. variegata](H. variegata.jpeg)
+![H. variegata](Images/H. variegata.jpeg)
 
 4. 14-spotted ladybeetle - Propylea quatuordecimpunctata
-![P. quatuordecimpunctata](P.quatuordecimpunctata.jpeg)
+![P. quatuordecimpunctata](Images/P.quatuordecimpunctata.jpeg)
 
 
 **We seek to address the following questions:**
