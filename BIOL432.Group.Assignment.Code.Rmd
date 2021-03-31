@@ -345,31 +345,13 @@ Some notes about what happened when I tried switching log transformations:
 
 
 Tried using NMDS (it doesn't work if you set distance method to bray-curtis dissimilarity)
-```{r}
-forest.dist <- vegdist(forest.specDOY, method = "euclidean", na.rm = TRUE)
-set.seed(21)
-forest.NMDS <- metaMDS(forest.dist, k=2) # k = 2 dimensions
 
-forest.NMDSdat <-data.frame(NMDS1 = forest.NMDS$points[,1],
-                            NMDS2 = forest.NMDS$points[,2],
-                            SpeciesID = row.names(forest.specDOY))
-```
 
 metaMDS() returns the warning: 'stress is (nearly) zero: you may have insufficient data'. Try plotting it anyways to see what it looks like.
 
-```{r}
-ggplot(data = forest.NMDSdat, aes(x = NMDS1, y = NMDS2)) +
-  geom_point(size = 3, alpha = 0.6) +
-  theme_custom() 
-```
 
-```{r}
-# To get a better look at most of the species remove HAXY (which has really high abundance in the forest subset relative to the other species - see above) from the plot
-forest.NMDSdat2 <- forest.NMDSdat %>% filter(SpeciesID != "HAXY")
-ggplot(data = forest.NMDSdat2, aes(x = NMDS1, y = NMDS2)) +
-  geom_point(size = 3, alpha = 0.6) +
-  theme_custom()
-```
+
+
 
 It seems like the NMDS coordinates have really small variation compared to the plots from tutorials and assignments. I wonder if it might have to do with the relatively small number of pairwise comparisons made in the distance matrix (13x13=169) - at least that's my best guess from googling.
 
