@@ -212,10 +212,14 @@ Creating native and non-native groups
 ```{r}
 # Create another column in the dataset that assigns non-native species to the 'Non-native' group and assign all other species to the 'Native' group
 LadyBugData <- LadyBugData %>%
-  mutate(Species_type = ifelse(SpeciesID == "C. septempunctata" |  SpeciesID == "H. axyridis" | SpeciesID == "H. variegata" |
+  mutate(Species_type = ifelse(SpeciesID == "C. septempunctata" |
+                                 SpeciesID == "H. axyridis" |
+                                 SpeciesID == "H. variegata" |
                                  SpeciesID == "P. quatuordecimpunctata",
                                "Non-native", "Native"))
 ```
+
+
 ##### Make sure to subset by invasion period and aphid outbreak period later
 
 
@@ -224,68 +228,67 @@ LadyBugData <- LadyBugData %>%
 Will need this to compare native and non-native species
 
 ```{r}
-SpeciesID <- unique(LadyBugData$SpeciesID)
-Native <- c("Y", "N", "Y", "Y", "Y", "Y", "Y", "N", "Y", "Y", "Y", "N", "N")
-
-SpeciesOrigin <- data.frame(SpeciesID, Native)
+# Select the species names and their corresponding status as native or non-native from the original dataset, and remove the duplicate rows using the distinct() function from dplyr
+SpeciesOrigin <- LadyBugData %>% select(SpeciesID, Species_type) %>% distinct()
 ```
 
 ### Plot histograms of the count data
 
 ```{r}
 # Plot counts for the raw abundance data (for each observation)
-ggplot(LadyBugData, aes(x=Adults, y=..count..))+
+ggplot(LadyBugData, aes(x=(Adults), y=..count..))+
   geom_histogram()
 ```
-There is a wide range in abundances. From Cameron's graphs, non-native species are much more abundant than native species. To get an idea of how often each species is represented in the dataset:
+
+There is a wide range in abundances. It is possible that certain species might be less abundant in the dataset compared to others. To get an idea of how often each species is represented in the dataset:
 ```{r}
-# Sum up the DOY abundances for each species
+# Sum up the abundances for each species in the entire dataset
 LadyBugData %>% group_by(SpeciesID) %>% summarise(totalAbun = sum(Adults, na.rm = TRUE))
 ```
-#Certain species are indeed far more common in the dataset than others.
+
+Certain species are indeed far more common in the dataset than others. Log-transforming the dataset might allow us to de-emphasize the importance of 
 
 See how the distribution of abundances looks with log transformations:
 ```{r}
-# In the decostand function log is the logarithm function suggested by Anderson, M.J., Ellingsen, K.E. & McArdle, B.H. (2006) Multivariate dispersion as a measure of beta diversity. Ecology Letters 9, 683–693: It applies log_b(x) + 1 where x > 0. b is the base of the logarithm. Higher bases give less weight to more abundant species and let rare species have more influence. (see documentation)
+# Add 1 to each abundance value prior to log transforming to prevent 0 values from becoming undefined. Since logx(1), where x is any base, equals 0, the 0 abundance values will simply return to being 0.
+# Higher log bases give less weight to more abundant species and let rare species have more influence.
 
-# Try log base 1
-ggplot(LadyBugData, aes(x=decostand(LadyBugData$Adults, method = "log", logbase = 2, na.rm = T)), y=..count..)+
+# Try log base 2
+ggplot(LadyBugData, aes(x=log((Adults + 1), base = 2), y=..count..)) +
   geom_histogram() +
   scale_x_continuous(name = "log2(Adults)")
 
 # Try log base 5
-ggplot(LadyBugData, aes(x=decostand(LadyBugData$Adults, method = "log", logbase = 5, na.rm = T)), y=..count..)+
+ggplot(LadyBugData, aes(x=log((Adults + 1), base = 5), y=..count..)) +
   geom_histogram() +
   scale_x_continuous(name = "log5(Adults)")
 
 # Try log base 10
-ggplot(LadyBugData, aes(x=decostand(LadyBugData$Adults, method = "log", logbase = 10, na.rm = T)), y=..count..)+
+ggplot(LadyBugData, aes(x=log((Adults + 1), base = 10), y=..count..)) +
   geom_histogram() +
   scale_x_continuous(name = "log10(Adults)")
 
-# Try log base 50
-ggplot(LadyBugData, aes(x=decostand(LadyBugData$Adults, method = "log", logbase = 50, na.rm = T)), y=..count..)+
-  geom_histogram() +
-  scale_x_continuous(name = "log50(Adults)")
-
 # log base = Inf scales the data to pure presence/absence in the decostand function
-ggplot(LadyBugData, aes(x=decostand(LadyBugData$Adults, method = "log", logbase = Inf, na.rm = T)), y=..count..)+
+ggplot(LadyBugData, aes(x=decostand(Adults, method = "log", logbase = Inf, na.rm = T)), y=..count..)+
   geom_histogram() +
   scale_x_continuous(name = "log.Inf(Adults)")
 ```
 
-For now let's try a log10 transformation of the abundance data. It should be pretty easy to switch between the transformations though.
+For now let's try a log5(x+1) transformation of the abundance data. It should be pretty easy to switch between the transformations though.
 
 ### Try clustering the abundance data using distance matrices and neighbor-joining trees
 
 #### Try abundance data instead:
 ```{r}
 # Log transform the abundance data using decostand? from the vegan package
-logTLadyBug <- LadyBugData
 logTLadyBug <- LadyBugData %>%
-  mutate(logTAdults = decostand(LadyBugData$Adults, method = "log", 
-                                logbase = 10, na.rm = T)) %>%  # transform with log10
+  mutate(logTAdults = log((Adults + 1), base = 5)) %>%  # transform with log5
   select(-Adults) # Replace Adults with logTAdults
+  
+#logTLadyBug <- LadyBugData %>%
+#  mutate(logTAdults = decostand(LadyBugData$Adults, method = "log", 
+#                                logbase = Inf, na.rm = T)) %>%  # make abundance data presence/absence
+#  select(-Adults) # Replace Adults with logTAdults
 
 # Could add a step here to split the dataset into subsets for relevant time periods. Would have to do the following steps separately for each time period.
 
@@ -328,48 +331,29 @@ rowSums(forest.specDOY, na.rm=T)
 HCONV and HTRE both have 0 observations. I think this results in undefined bray-curtis dissimilarity values. Undefined values do not occur when you switch the distance metric to 'euclidean', however 'euclidean' does not distinguish among the species as well. Also switching to euclidean doesn't seem to affect the topology of the tree much but the branch lengths become very uneven.
 
 
-```{r fig.height=8, fig.width=8}
+```{r fig.height=6, fig.width=10}
 # Make Neighbor-joining tree
 forest.tree <- njs(forest.dist) # njs allows for missing values in the distance matrix
 
-ggtree(forest.tree, layout = "rectangular") %<+% SpeciesOrigin +
-  geom_tiplab(aes(colour = Native)) +
-  theme(legend.position = "right") 
+ggtree(forest.tree, layout = "rectangular") %<+% SpeciesOrigin + # Use SpeciesOrigin data.frame to colour-code the species by Species_type (Native or Non-native)
+  geom_tiplab(aes(colour = Species_type)) +
+  scale_colour_discrete(direction = -1) + # Make non-natives red and natives blue, which is the opposite of the default
+  xlim_tree(0.65) # Set x-axis limits for the tree so that the tip-labels don't get cut off
 ```
 Some notes about what happened when I tried switching log transformations:
 
-- log10 and log50 transformations gave identical trees
-- Switching from log10 to log.Inf (presence/absence) barely changed the topology, and the relationships between the non-native species remained the same.
-- Switching from log10 to log2 barely changed the tree
-- log2 transformation and raw abundance data gave identical trees
+- Switching from the log5(x+1) transformation to the raw abundance data gave almost identical trees. The only difference was that C. septempunctata became closer to H. axyridis than C. munda.
+- log5(x+1) and log10(x+1) transformations give identical trees
 
 
 Tried using NMDS (it doesn't work if you set distance method to bray-curtis dissimilarity)
-```{r}
-forest.dist <- vegdist(forest.specDOY, method = "euclidean", na.rm = TRUE)
-set.seed(21)
-forest.NMDS <- metaMDS(forest.dist, k=2) # k = 2 dimensions
 
-forest.NMDSdat <-data.frame(NMDS1 = forest.NMDS$points[,1],
-                            NMDS2 = forest.NMDS$points[,2],
-                            SpeciesID = row.names(forest.specDOY))
-```
 
 metaMDS() returns the warning: 'stress is (nearly) zero: you may have insufficient data'. Try plotting it anyways to see what it looks like.
 
-```{r}
-ggplot(data = forest.NMDSdat, aes(x = NMDS1, y = NMDS2)) +
-  geom_point(size = 3, alpha = 0.6) +
-  theme_custom() 
-```
 
-```{r}
-# To get a better look at most of the species remove HAXY (which has really high abundance in the forest subset relative to the other species - see above) from the plot
-forest.NMDSdat2 <- forest.NMDSdat %>% filter(SpeciesID != "HAXY")
-ggplot(data = forest.NMDSdat2, aes(x = NMDS1, y = NMDS2)) +
-  geom_point(size = 3, alpha = 0.6) +
-  theme_custom()
-```
+
+
 
 It seems like the NMDS coordinates have really small variation compared to the plots from tutorials and assignments. I wonder if it might have to do with the relatively small number of pairwise comparisons made in the distance matrix (13x13=169) - at least that's my best guess from googling.
 
@@ -487,6 +471,14 @@ Clearly abundance does vary over time, but not necessarily exactly according to 
 Plotting abundance w/ native and non-native groupings
 ```{r}
 ggplot(LadyBugData, aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth() +
+  facet_wrap(~ TYPE) +
+  theme_bw()
+
+# Trying the same thing as above but with the log transformed dataset
+ggplot(logTLadyBug, aes(x = DOY, y = logTAdults, colour = Species_type)) +
   scale_x_continuous(expand = c(0,0)) +
   scale_y_continuous(expand = c(0,0)) +
   geom_smooth() +
