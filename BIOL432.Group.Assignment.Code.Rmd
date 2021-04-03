@@ -121,21 +121,90 @@ library(ggtree)
 
 ## Load Dataset
 ```{r}
-LadyBugData <- read.csv("BIOL432.Data.GroupProject.csv")
+dat <- read.csv("BIOL432.Data.GroupProject.csv")
 ```
 
 ## Visualise Raw Data
 ```{r}
-head(LadyBugData)
+head(dat)
 ```
 
 ```{r}
+tail(dat)
+```
+
+```{r}
+summary(dat) #view summary for each variable in dataset
+```
+
+## Using Regex in Unix to change SpeciesID into modified scientific name
+
+The code chunk below creates a new csv file with the updated scientific names converted using regex expressions
+```
+#!/bin/bash
+
+#Date:04/01/2021
+#Author: Yudong Liu 
+#Purpose: This bash script is written to test if we can substitute species ID with their names
+
+awk '{gsub(/ABIPN/, "A. bipunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CMAC/, "C. maculata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CSTIG/, "C. stigma");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CTRIF/, "C. trifasciata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CMUND/, "C. munda");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HCONV/, "H. convergens");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HGLAC/, "H. glacialis");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HTRE/, "H. tredecimpunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CSEPT/, "C. septempunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HAXY/, "H. axyridis");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HVAR/, "H. variegata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HPARN/, "H. parenthesis");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/PQUA/, "P. quatuordecimpunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+
+#End
+
+```
+
+Upload updated file
+```{r}
+LadyBugData <- read.csv("BashTest4.csv")
+```
+
+Inspect updated file
+```{r}
+head(LadyBugData)
 tail(LadyBugData)
 ```
-
 ```{r}
-summary(LadyBugData) #view summary for each variable in dataset
+summary(LadyBugData)
 ```
+
 
 ## Making A Custom Function
 
@@ -170,43 +239,6 @@ I initially used presence/absence instead of abundance, and then tried abundance
 
 - Still, it's worth noting that the traps are more likely to catch the most abundant species, so the plots will still be biased towards finding differences between abundant and non-abundant species.
 
-### Create a function to use Regex coding to change speciesID into scientific name 
-```{r}
-changeID <- function(dataframe, speciesIDCode, SpeciesName, column){
-  dataframe$SpeciesID <- gsub(speciesIDCode, SpeciesName,dataframe$SpeciesID)
-  return(dataframe)
-}
-```
-
-## Change all speciesID names
-```{r}
-#ABIPN 
-LadyBugData <- changeID(LadyBugData, "ABIPN", "A. bipunctata")
-#CMAC
-LadyBugData <- changeID(LadyBugData, "CMAC", "C. maculata")
-#CSTIG
-LadyBugData <- changeID(LadyBugData, "CSTIG", "C. stigma")
-#CTRIF
-LadyBugData <- changeID(LadyBugData, "CTRIF", "C. trifasciata")
-#CMUND
-LadyBugData <- changeID(LadyBugData, "CMUND", "C. munda")
-#HCONV
-LadyBugData <- changeID(LadyBugData, "HCONV", "H. convergens")
-#HGLAC
-LadyBugData <- changeID(LadyBugData, "HGLAC", "H. glacialis")
-#HPARN
-LadyBugData <- changeID(LadyBugData, "HPARN", "H. parenthesis")
-#HTRE
-LadyBugData <- changeID(LadyBugData, "HTRE", "H. tredecimpunctata")
-#CSEPT
-LadyBugData <- changeID(LadyBugData, "CSEPT", "C. septempunctata")
-#HAXY
-LadyBugData <- changeID(LadyBugData, "HAXY", "H. axyridis")
-#HVAR
-LadyBugData <- changeID(LadyBugData, "HVAR", "H. variegata")
-#PQUA
-LadyBugData <- changeID(LadyBugData, "PQUA", "P. quatuordecimpunctata")
-```
 
 Creating native and non-native groups
 ```{r}
