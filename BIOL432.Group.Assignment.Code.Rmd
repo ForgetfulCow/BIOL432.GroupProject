@@ -437,7 +437,7 @@ row.names(forest.specYrDOY) <- forest.specYrDOY$SpeciesID
 
 forest.specYrDOY <- data.frame(forest.specYrDOY) %>% select(-SpeciesID, -TYPE) # Remove speciesID and habitat type from dataset so dist() can be run on it
 
-head(forest.specYrDOY)
+head(forest.specYrDOY) 
 ```
 
 
@@ -460,7 +460,7 @@ More of the comparisons seem undefined now. I don't know why that is.
 forest.tree <- njs(forest.dist) # njs allows for missing values in the distance matrix
 
 ggtree(forest.tree, layout = "rectangular") %<+% SpeciesOrigin +
-  geom_tiplab(aes(colour = Native)) +
+  geom_tiplab(aes(colour = Species_type)) +
   theme(legend.position = "right")
 ```
 
