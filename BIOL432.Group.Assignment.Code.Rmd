@@ -191,7 +191,10 @@ mv New.csv BashTest4.csv
 
 ```
 
-Upload updated file
+## Upload updated file
+
+Using the bash script above, a new csv file was created with the changed species names. In order to decrease computational time and difficulty, the resultant file is uploaded in the code chunk below. 
+
 ```{r}
 LadyBugData <- read.csv("BashTest4.csv")
 ```
