@@ -210,7 +210,9 @@ summary(LadyBugData)
 
 This function will create a custom theme for our ggplots. 
 
-```{r}
+```{r eval=FALSE} 
+# eval=FALSE is used in order to show code but not include long output generated
+
 theme_custom <- function () {
   # Using theme_minimal as a base. Will replace elements that we want to change.
   theme_minimal() %+replace% 
