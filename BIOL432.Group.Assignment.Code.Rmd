@@ -39,23 +39,30 @@ There are 13 species of Ladybeetle documented in this study. 9 species are nativ
 2. Spotted Lady Beetle - [Coleomegilla maculata](https://biocontrol.entomology.cornell.edu/predators/Coleomegilla.php) 
 ![C. maculata](Images/C. maculata.jpeg)
 
+
 3. Twice stabbed ladybug - [Chilocorus stigma](https://www.discoverlife.org/mp/20q?search=Chilocorus+stigma)
 ![C. stigma](Images/C.stigma.jpeg)
+
 
 4. Three-banded ladybeetle - [Coccinella trifasciata](https://www.discoverlife.org/mp/20q?search=Coccinella+trifasciata)
 ![C. trifasciata](Images/C.trifasciata.jpeg)
 
+
 5. Polished/spotless ladybeetle - [Cycloneda munda](https://bugguide.net/node/view/472564)
 ![C. munda](Images/C. munda.jpeg)
+
 
 6. Convergent ladybeetle - [Hippodamia convergens](https://en.wikipedia.org/wiki/Hippodamia_convergens)
 ![H. convergens](Images/H. convergens.jpeg)
 
+
 7. Glacial ladybeetle - [Hippodamia glacialis](https://www.discoverlife.org/mp/20q?search=Hippodamia+glacialis)
 ![H. glacialis](Images/H.glacialis.jpeg)
 
+
 8. Parenthesis ladybeetle -[ Hippodamia parenthesis](https://www.discoverlife.org/mp/20q?search=Hippodamia+parenthesis&guide=Ladybug&cl=llp)
 ![H. parenthesis](Images/H. parenthesis.jpeg)
+
 
 9. Thirteen-spot ladybeetle - [Hippodamia tredecimpunctata](https://www.jungledragon.com/specie/13740/thirteen-spot_ladybird.html)
 ![H. tredecimpunctata](Images/H.tredecimpunctata.jpeg)
@@ -67,11 +74,14 @@ There are 13 species of Ladybeetle documented in this study. 9 species are nativ
 1. Seven-spot ladybeetle - [Coccinella septempunctata](https://kids.kiddle.co/Coccinella_septempunctata)
 ![C. septempunctata](Images/C. septempunctata.jpeg)
 
+
 2. Harlequin/Asian ladybeetle - [Harmonia axyridis](https://davesgarden.com/guides/bf/go/4139/#b)
 ![H. axyridis](Images/H.axyridis.jpeg)
 
+
 3. Variegated ladybeetle - [Hippodamia variegata](https://bugguide.net/node/view/352609)
 ![H. variegata](Images/H. variegata.jpeg)
+
 
 4. 14-spotted ladybeetle - [Propylea quatuordecimpunctata](https://www.inaturalist.org/taxa/61532-Propylea-quatuordecimpunctata)
 ![P. quatuordecimpunctata](Images/P.quatuordecimpunctata.jpeg)
