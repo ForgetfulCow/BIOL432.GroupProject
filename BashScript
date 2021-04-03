@@ -1,0 +1,47 @@
+#!/bin/bash
+
+#Date:04/01/2021
+#Author: Yudong Liu 
+#Purpose: This bash script is written to test if we can substitute species ID with their names
+
+awk '{gsub(/ABIPN/, "A. bipunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CMAC/, "C. maculata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CSTIG/, "C. stigma");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CTRIF/, "C. trifasciata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CMUND/, "C. munda");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HCONV/, "H. convergens");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HGLAC/, "H. glacialis");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HTRE/, "H. tredecimpunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CSEPT/, "C. septempunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HAXY/, "H. axyridis");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HVAR/, "H. variegata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HPARN/, "H. parenthesis");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/PQUA/, "P. quatuordecimpunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+
+#End
