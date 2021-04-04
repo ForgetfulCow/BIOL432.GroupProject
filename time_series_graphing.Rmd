@@ -1,0 +1,379 @@
+---
+title: "Question_1_code"
+author: "Cameron MacPhail"
+date: "16/03/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Custom theme for graphs
+```{r eval=FALSE} 
+# eval=FALSE is used in order to show code but not include long output generated
+
+theme_custom <- function () {
+  # Using theme_minimal as a base. Will replace elements that we want to change.
+  theme_minimal() %+replace% 
+  theme(
+    # Changing grid elements
+    axis.ticks = element_line(colour = "black"), 
+    # Changing axis text
+    axis.text = element_text(size = rel(0.8), colour="black"),
+    # Changing facet title text
+    strip.text = element_text(size = rel(1), colour = "black"),
+    #add an axis line 
+    axis.line = element_line(colour = 'black', size = 1)
+  )
+}
+```
+
+
+# Question 1
+
+### Within sampling years, does native and non-native species abundance change according to the month?
+
+Loading packages
+```{r, echo = FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+Importing Data
+```{r}
+dat <- read.csv("./BIOL432.Data.GroupProject.csv")
+dat$TYPE <- factor(dat$TYPE, levels = c("annual", "perennial", "forest"))
+head(dat)
+```
+
+The dates loaded in correctly, which is good.
+
+## General temporal abundance patterns
+
+Plot ladybeetle abundance against the day of the year to determine if abundance varies at all over time. Display this data separately for each individual habitat type (annual, forest, perennial) because the sampling method used to capture the ladybeetles may have been more efficient in some habitats than other habitats *(find Bahlai et al 2013 and cite it)*.
+```{r}
+ggplot(dat, aes(x = DOY, y = Adults)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth() +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+
+
+Clearly abundance does vary over time, but not necessarily exactly according to month. Let's examine how well this pattern holds for individual species as well as native vs non-native assemblages.
+
+## Temporal abundance of native vs non-native ladybeetles
+
+Creating native and non-native groups
+```{r}
+# Create another column in the dataset that assigns non-native species to the 'Non-native' group and assign all other species to the 'Native' group
+dat <- dat %>%
+  mutate(Species_type = ifelse(SpeciesID == "CSEPT" |  SpeciesID == "HAXY" | SpeciesID == "HVAR" |
+                                 SpeciesID == "PQUA",
+                               "Non-native", "Native"))
+```
+
+
+Plotting abundance w/ native and non-native groupings
+```{r}
+ggplot(dat, aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+
+Non-native ladybeetles clearly have higher abundance throughout the entire year in most habitats. There doesn't seem to be strong patterns in forest habitat for native ladybeetles, but this might just be because they have such low abundance. Taking a look at abundance pre-invasion of the various exotic species should help show what's going on.
+
+Also, in annual crop habitats there seems to be a decline in non-native ladybeetle abundance and a concurrent increase in native ladybeetle abundance around 2/3 of the way through the year, lending support to our hypothesis of temporal niche partitioning.
+
+
+## Pre-invasion temporal abundance patterns
+
+1989 - 1993: one non-native ladybeetles
+```{r}
+dat %>%
+  filter(Year == c(1989:1993), TYPE != "forest") %>% # Filter the desired years and remove forest data (forest site only started getting sampled in 1993, so there is not enough data for this time frame)
+  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+Native species are already low in abundance by this point, but seem to do well at the beginning and end of growing seasons.
+
+
+
+1994 - 1998: two non-native ladybeetles
+```{r}
+dat %>%
+  filter(Year == c(1994:1998)) %>% # Filtering desired years, forests were present by this time period so they are left in the dataset
+  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+
+There is a very interesting change in abundance patterns for annual crops. There is now a second peak in abundance on non-native species at the end of the growing season.
+
+Graphing by individual species (replace "Species_type" with "SpeciesID") shows that the increase in native abundance of is driven almost entirely by one species:
+```{r}
+dat %>%
+  filter(Year == c(1994:1998)) %>% # Filtering desired years, forests were present by this time period so they are left in the dataset
+  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+Even though there's data for forest areas in this time period, there's not enough to compute a line according to the GAM method. Unfortunately, LOESS, which could compute a line with this amount of data, would take a very long time for plots with more data. We will have to simply exclude the forest section from this time series.
+
+
+1999 - 2006: three non-native ladybeetles + soybean aphid outbreaks
+```{r}
+dat %>%
+  filter(Year == c(1999:2006)) %>% #filtering desired years
+  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+
+During this time period, a new, exotic ladybeetle species arrived and there were repeated soybean aphid outbreaks. Things get a little weird....
+
+2007 - 2012: four non-native ladybeetles + soybean aphids present
+```{r}
+dat %>%
+  filter(Year == c(2007:2012)) %>% #filtering desired years
+  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+
+That pattern of mid to late season niche partitioning becomes very apparent in annual cropland. Potentially related to agricultural activities (e.g. harvest)? Digging into the patterns for specific treatment types might explain more.
+
+```{r}
+dat %>% filter(TYPE == "annual", Year == c(2007:2012)) %>% 
+  ggplot(aes(x = DOY, y = Adults, colour = TREAT_DESC)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "loess", span = 1, se = F) +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+
+
+
+## Conclusion
+
+Overall, abundance certainly varies over time and we see some evidence for niche partitioning at this stage. Invasion of new species also definitely has an impact on patterns.
+
+
+# Log-transformed data
+
+I'm going to generate the same graphs, but using log transformed data. This should highlight the changes in abundance of rare species.
+
+```{r}
+logTLadyBug <- dat %>%
+  mutate(logTAdults = log((Adults + 1), base = 5)) %>%  # transform with log5
+  select(-Adults) # Replace logTAdults with logTlogTAdults
+```
+
+
+This log transformation will preserve the zero values in the dataset, instead of making them undefined.
+
+## General temporal abundance patterns
+```{r}
+ggplot(logTLadyBug, aes(x = DOY, y = logTAdults)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth() +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+
+## Temporal abundance of native vs non-native ladybeetles
+
+```{r}
+ggplot(logTLadyBug, aes(x = DOY, y = logTAdults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+
+
+## Pre-invasion temporal abundance patterns
+
+1989 - 1993: one non-native ladybeetles
+```{r}
+logTLadyBug %>%
+  filter(Year == c(1989:1993), TYPE != "forest") %>% # Filter the desired years and remove forest logTLadyBuga (forest site only started getting sampled in 1993, so there is not enough logTLadyBuga for this time frame)
+  ggplot(aes(x = DOY, y = logTAdults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+
+1994 - 1998: two non-native ladybeetles
+```{r}
+logTLadyBug %>%
+  filter(Year == c(1994:1998)) %>% # Filtering desired years, forests were present by this time period so they are left in the logTLadyBugaset
+  ggplot(aes(x = DOY, y = logTAdults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+
+
+
+
+1999 - 2006: three non-native ladybeetles + soybean aphid outbreaks
+```{r}
+logTLadyBug %>%
+  filter(Year == c(1999:2006)) %>% #filtering desired years
+  ggplot(aes(x = DOY, y = logTAdults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+
+2007 - 2012: four non-native ladybeetles + soybean aphids present
+```{r}
+logTLadyBug %>%
+  filter(Year == c(2007:2012)) %>% #filtering desired years
+  ggplot(aes(x = DOY, y = logTAdults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+
+
+Patterns for specific treatment types:
+```{r}
+logTLadyBug %>% filter(TYPE == "annual", Year == c(2007:2012)) %>% 
+  ggplot(aes(x = DOY, y = logTAdults, colour = TREAT_DESC, linetype = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "loess", span = 1, se = F) +
+  facet_wrap(~ TYPE) +
+  theme_custom()
+```
+
+
+It appears that the log transformation does very little to highlight rare species, and so we won't be including it in the final analysis.
+
+
+## Creating time-series graphs
+
+Now we're going to join the graphs we just made to create time series graphs
+
+```{r}
+library(ggpubr)
+library(cowplot) #Loading packages to join the graphs
+```
+
+
+Making the regular data graphs again to plot them:
+```{r}
+#1989 - 1993: one non-native ladybeetles
+p1 <- dat %>%
+  filter(Year == c(1989:1993), TYPE != "forest") %>% # Filter the desired years and remove forest data
+  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom() +
+  theme(legend.position = "none", axis.title = element_blank())
+
+#1994 - 1998: two non-native ladybeetles
+p2 <- dat %>%
+  filter(Year == c(1994:1998), TYPE != "forest") %>% # Filter the desired years and remove forest data
+  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom() +
+  theme(legend.position = "none", axis.title = element_blank())
+
+#1999 - 2006: three non-native ladybeetles + soybean aphid outbreaks
+p3 <- dat %>%
+  filter(Year == c(1999:2006)) %>% # Filter the desired years and remove forest data
+  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom() +
+  theme(legend.position = "none", axis.title = element_blank())
+
+#2007 - 2012: four non-native ladybeetles + soybean aphids present
+p4 <- dat %>%
+  filter(Year == c(2007:2012)) %>% # Filter the desired years and remove forest data
+  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom() +
+  theme(legend.position = "none", axis.title = element_blank())
+```
+
+Creating regular data timeseries plot:
+```{r}
+legend <- cowplot::get_legend(dat %>% #Extracting the legend from one of our previous plots to put on our compound graph
+  filter(Year == c(1989:1993), TYPE != "forest") %>%
+  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  scale_colour_discrete(name = "Species type") +
+  geom_smooth(method = "gam") +
+  facet_wrap(~ TYPE) +
+  theme_custom())
+
+png(filename = "abundance_timeseries.png", width = 10, height = 10,
+    units = "in", bg = "transparent", res = 300)
+
+comp_graph <- 
+  plot_grid(p1, p2, p3, p4,
+        ncol = 1, nrow = 4,
+        align = "v",
+        axis = "l",
+        labels = "AUTO")
+
+comp_graph <- plot_grid(comp_graph, legend,
+                        rel_widths = c(1, 0.3),
+                        rel_heights = c(1, 0.3))
+
+annotate_figure(comp_graph,
+                bottom = text_grob("Day of the year"),
+                left = text_grob("Abundance", rot = 90))
+
+dev.off()
+```
+
+
