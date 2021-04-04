@@ -122,21 +122,9 @@ dat %>%
 ```
 
 There is a very interesting change in abundance patterns for annual crops. There is now a second peak in abundance on non-native species at the end of the growing season.
-
-Graphing by individual species (replace "Species_type" with "SpeciesID") shows that the increase in native abundance of is driven almost entirely by one species:
-```{r}
-dat %>%
-  filter(Year == c(1994:1998)) %>% # Filtering desired years, forests were present by this time period so they are left in the dataset
-  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
-  scale_x_continuous(expand = c(0,0)) +
-  scale_y_continuous(expand = c(0,0)) +
-  geom_smooth(method = "gam") +
-  facet_wrap(~ TYPE) +
-  theme_custom()
-```
-Even though there's data for forest areas in this time period, there's not enough to compute a line according to the GAM method. Unfortunately, LOESS, which could compute a line with this amount of data, would take a very long time for plots with more data. We will have to simply exclude the forest section from this time series.
-
-
+\n
+Even though there is data for forest areas in this time period, there's not enough to compute a line according to the GAM method. Unfortunately, LOESS, which could compute a line with this amount of data, would take a very long time for plots with more data. We will have to simply exclude the forest section from this time series.
+\n
 1999 - 2006: three non-native ladybeetles + soybean aphid outbreaks
 ```{r}
 dat %>%
