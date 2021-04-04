@@ -44,23 +44,30 @@ There are 13 species of Ladybeetle documented in this study. 9 species are nativ
 2. Spotted Lady Beetle - [Coleomegilla maculata](https://biocontrol.entomology.cornell.edu/predators/Coleomegilla.php) 
 ![C. maculata](Images/C. maculata.jpeg)
 
+
 3. Twice stabbed ladybug - [Chilocorus stigma](https://www.discoverlife.org/mp/20q?search=Chilocorus+stigma)
 ![C. stigma](Images/C.stigma.jpeg)
+
 
 4. Three-banded ladybeetle - [Coccinella trifasciata](https://www.discoverlife.org/mp/20q?search=Coccinella+trifasciata)
 ![C. trifasciata](Images/C.trifasciata.jpeg)
 
+
 5. Polished/spotless ladybeetle - [Cycloneda munda](https://bugguide.net/node/view/472564)
 ![C. munda](Images/C. munda.jpeg)
+
 
 6. Convergent ladybeetle - [Hippodamia convergens](https://en.wikipedia.org/wiki/Hippodamia_convergens)
 ![H. convergens](Images/H. convergens.jpeg)
 
+
 7. Glacial ladybeetle - [Hippodamia glacialis](https://www.discoverlife.org/mp/20q?search=Hippodamia+glacialis)
 ![H. glacialis](Images/H.glacialis.jpeg)
 
+
 8. Parenthesis ladybeetle -[ Hippodamia parenthesis](https://www.discoverlife.org/mp/20q?search=Hippodamia+parenthesis&guide=Ladybug&cl=llp)
 ![H. parenthesis](Images/H. parenthesis.jpeg)
+
 
 9. Thirteen-spot ladybeetle - [Hippodamia tredecimpunctata](https://www.jungledragon.com/specie/13740/thirteen-spot_ladybird.html)
 ![H. tredecimpunctata](Images/H.tredecimpunctata.jpeg)
@@ -72,11 +79,14 @@ There are 13 species of Ladybeetle documented in this study. 9 species are nativ
 1. Seven-spot ladybeetle - [Coccinella septempunctata](https://kids.kiddle.co/Coccinella_septempunctata)
 ![C. septempunctata](Images/C. septempunctata.jpeg)
 
+
 2. Harlequin/Asian ladybeetle - [Harmonia axyridis](https://davesgarden.com/guides/bf/go/4139/#b)
 ![H. axyridis](Images/H.axyridis.jpeg)
 
+
 3. Variegated ladybeetle - [Hippodamia variegata](https://bugguide.net/node/view/352609)
 ![H. variegata](Images/H. variegata.jpeg)
+
 
 4. 14-spotted ladybeetle - [Propylea quatuordecimpunctata](https://www.inaturalist.org/taxa/61532-Propylea-quatuordecimpunctata)
 ![P. quatuordecimpunctata](Images/P.quatuordecimpunctata.jpeg)
@@ -127,26 +137,100 @@ library(ggtree)
 
 ## Load Dataset
 ```{r}
-LadyBugData <- read.csv("BIOL432.Data.GroupProject.csv")
+dat <- read.csv("BIOL432.Data.GroupProject.csv")
 ```
 
 ## Visualise Raw Data
 ```{r}
-head(LadyBugData)
+head(dat)
 ```
 
 ```{r}
+tail(dat)
+```
+
+```{r}
+summary(dat) #view summary for each variable in dataset
+```
+
+## Using Regex in Unix to change SpeciesID into modified scientific name
+
+The code chunk below creates a new csv file with the updated scientific names converted using regex expressions
+```
+#!/bin/bash
+
+#Date:04/01/2021
+#Author: Yudong Liu 
+#Purpose: This bash script is written to test if we can substitute species ID with their names
+
+awk '{gsub(/ABIPN/, "A. bipunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CMAC/, "C. maculata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CSTIG/, "C. stigma");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CTRIF/, "C. trifasciata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CMUND/, "C. munda");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HCONV/, "H. convergens");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HGLAC/, "H. glacialis");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HTRE/, "H. tredecimpunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CSEPT/, "C. septempunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HAXY/, "H. axyridis");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HVAR/, "H. variegata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HPARN/, "H. parenthesis");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/PQUA/, "P. quatuordecimpunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+
+#End
+
+```
+
+## Upload updated file
+
+Using the bash script above, a new csv file was created with the changed species names. In order to decrease computational time and difficulty, the resultant file is uploaded in the code chunk below. 
+
+```{r}
+LadyBugData <- read.csv("BashTest4.csv")
+```
+
+Inspect updated file
+```{r}
+head(LadyBugData)
 tail(LadyBugData)
 ```
-
 ```{r}
-summary(LadyBugData) #view summary for each variable in dataset
+summary(LadyBugData)
 ```
+
 
 ## Custom Function for ggplot Theme
 
-This function will create a custom theme for our ggplots:
-```{r}
+This function will create a custom theme for our ggplots.
+```{r eval=FALSE} 
+# eval=FALSE is used in order to show code but not include long output generated
+
 theme_custom <- function () {
   # Using theme_minimal as a base. Will replace elements that we want to change.
   theme_minimal() %+replace% 
@@ -163,45 +247,6 @@ theme_custom <- function () {
 }
 ```
 
-## Change species IDs to scientific names
-
-Create a function to use Regex coding to change speciesID into scientific name:
-```{r}
-changeID <- function(dataframe, speciesIDCode, SpeciesName, column){
-  dataframe$SpeciesID <- gsub(speciesIDCode, SpeciesName,dataframe$SpeciesID)
-  return(dataframe)
-}
-```
-
-Change all speciesID names:
-```{r}
-#ABIPN 
-LadyBugData <- changeID(LadyBugData, "ABIPN", "A. bipunctata")
-#CMAC
-LadyBugData <- changeID(LadyBugData, "CMAC", "C. maculata")
-#CSTIG
-LadyBugData <- changeID(LadyBugData, "CSTIG", "C. stigma")
-#CTRIF
-LadyBugData <- changeID(LadyBugData, "CTRIF", "C. trifasciata")
-#CMUND
-LadyBugData <- changeID(LadyBugData, "CMUND", "C. munda")
-#HCONV
-LadyBugData <- changeID(LadyBugData, "HCONV", "H. convergens")
-#HGLAC
-LadyBugData <- changeID(LadyBugData, "HGLAC", "H. glacialis")
-#HPARN
-LadyBugData <- changeID(LadyBugData, "HPARN", "H. parenthesis")
-#HTRE
-LadyBugData <- changeID(LadyBugData, "HTRE", "H. tredecimpunctata")
-#CSEPT
-LadyBugData <- changeID(LadyBugData, "CSEPT", "C. septempunctata")
-#HAXY
-LadyBugData <- changeID(LadyBugData, "HAXY", "H. axyridis")
-#HVAR
-LadyBugData <- changeID(LadyBugData, "HVAR", "H. variegata")
-#PQUA
-LadyBugData <- changeID(LadyBugData, "PQUA", "P. quatuordecimpunctata")
-```
 
 ## Create native and non-native groups in the dataset
 ```{r}
@@ -523,7 +568,7 @@ plot_grid(T1.A.tree, T2.A.tree, T3.A.tree, T4.A.tree, labels = c("A", "B", "C", 
 plot_grid(T1.P.tree, T2.P.tree, T3.P.tree, T4.P.tree, labels = c("A", "B", "C", "D"))
 ```
 
-So there's a alternatives to clustering by trees:
+So there's a couple alternatives to clustering by trees:
 
 1. Try a PCoA plot to cluster the data instead (seemed to be suggested when I tried googling the warning "stress is (nearly) zero: you may have insufficient data"). If we do this, it'll be good to say why we didn't use NMDS. Downside is that we didn't cover it in class, so the prof and TAs might not like that?
 
