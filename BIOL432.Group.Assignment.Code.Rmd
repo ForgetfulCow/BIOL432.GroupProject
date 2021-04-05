@@ -38,58 +38,58 @@ There are 13 species of Ladybeetle documented in this study. 9 species are nativ
 ## Native species
 
 1. Two Spot ladybird - [Adalia bipunctata](https://en.wikipedia.org/wiki/Adalia_bipunctata)
-![A.bipunctata](Images/A. bipunctata.jpeg)
+![A.bipunctata](Images/A. bipunctata.jpeg){width=30%}
 
 
 2. Spotted Lady Beetle - [Coleomegilla maculata](https://biocontrol.entomology.cornell.edu/predators/Coleomegilla.php) 
-![C. maculata](Images/C. maculata.jpeg)
+![C. maculata](Images/C. maculata.jpeg){width=30%}
 
 
 3. Twice stabbed ladybug - [Chilocorus stigma](https://www.discoverlife.org/mp/20q?search=Chilocorus+stigma)
-![C. stigma](Images/C.stigma.jpeg)
+![C. stigma](Images/C.stigma.jpeg){width=30%}
 
 
 4. Three-banded ladybeetle - [Coccinella trifasciata](https://www.discoverlife.org/mp/20q?search=Coccinella+trifasciata)
-![C. trifasciata](Images/C.trifasciata.jpeg)
+![C. trifasciata](Images/C.trifasciata.jpeg){width=30%}
 
 
 5. Polished/spotless ladybeetle - [Cycloneda munda](https://bugguide.net/node/view/472564)
-![C. munda](Images/C. munda.jpeg)
+![C. munda](Images/C. munda.jpeg){width=30%}
 
 
 6. Convergent ladybeetle - [Hippodamia convergens](https://en.wikipedia.org/wiki/Hippodamia_convergens)
-![H. convergens](Images/H. convergens.jpeg)
+![H. convergens](Images/H. convergens.jpeg){width=30%}
 
 
 7. Glacial ladybeetle - [Hippodamia glacialis](https://www.discoverlife.org/mp/20q?search=Hippodamia+glacialis)
-![H. glacialis](Images/H.glacialis.jpeg)
+![H. glacialis](Images/H.glacialis.jpeg){width=30%}
 
 
 8. Parenthesis ladybeetle -[ Hippodamia parenthesis](https://www.discoverlife.org/mp/20q?search=Hippodamia+parenthesis&guide=Ladybug&cl=llp)
-![H. parenthesis](Images/H. parenthesis.jpeg)
+![H. parenthesis](Images/H. parenthesis.jpeg){width=30%}
 
 
 9. Thirteen-spot ladybeetle - [Hippodamia tredecimpunctata](https://www.jungledragon.com/specie/13740/thirteen-spot_ladybird.html)
-![H. tredecimpunctata](Images/H.tredecimpunctata.jpeg)
+![H. tredecimpunctata](Images/H.tredecimpunctata.jpeg){width=30%}
 
 
 
 ## Non-native Invasive Species
 
 1. Seven-spot ladybeetle - [Coccinella septempunctata](https://kids.kiddle.co/Coccinella_septempunctata)
-![C. septempunctata](Images/C. septempunctata.jpeg)
+![C. septempunctata](Images/C. septempunctata.jpeg){width=30%}
 
 
 2. Harlequin/Asian ladybeetle - [Harmonia axyridis](https://davesgarden.com/guides/bf/go/4139/#b)
-![H. axyridis](Images/H.axyridis.jpeg)
+![H. axyridis](Images/H.axyridis.jpeg){width=30%}
 
 
 3. Variegated ladybeetle - [Hippodamia variegata](https://bugguide.net/node/view/352609)
-![H. variegata](Images/H. variegata.jpeg)
+![H. variegata](Images/H. variegata.jpeg){width=30%}
 
 
 4. 14-spotted ladybeetle - [Propylea quatuordecimpunctata](https://www.inaturalist.org/taxa/61532-Propylea-quatuordecimpunctata)
-![P. quatuordecimpunctata](Images/P.quatuordecimpunctata.jpeg)
+![P. quatuordecimpunctata](Images/P.quatuordecimpunctata.jpeg){width=30%}
 
 
 **We seek to address the following questions:**
@@ -591,7 +591,7 @@ ggplot(LadyBugData, aes(x = DOY, y = Adults)) +
   scale_y_continuous(expand = c(0,0)) +
   geom_smooth() +
   facet_wrap(~ TYPE) +
-  theme_custom()
+  theme_bw()
 ```
 
 
