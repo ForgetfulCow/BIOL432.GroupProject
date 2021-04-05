@@ -614,7 +614,7 @@ plot_grid(T3.F.tree, T4.F.tree, labels = c("A", "B"))
 
 As noted in the comments in the code above, the 1989 - 1993 forest data could not be analyzed because no ladybeetles were observed in this habitat during that time period (see the T1.F.AbunSum object), and the 1994 - 1998 forest data could not be analyzed with a NJ tree because there was not enough distance information to construct the tree.
 
-There is no distinct clustering of native and non-native ladybeetle species in either the 1999 - 2006 or the 2007 - 2012 time periods. Both trees have a lot of polytomies, which suggests that the differences between species in their DOY abundance patterns are poorly resolved.
+There is no distinct clustering of native and non-native ladybeetle species in either the 1999 - 2006 (A) or the 2007 - 2012 (B) time periods for forest data. Both trees have a lot of polytomies, which suggests that the differences between species in their DOY abundance patterns are poorly resolved.
 
 ```{r fig.height=6, fig.width=12}
 # Plot the trees for each time period in the annual habitat together as a single figure
@@ -622,7 +622,11 @@ There is no distinct clustering of native and non-native ladybeetle species in e
 plot_grid(T1.A.tree, T2.A.tree, T3.A.tree, T4.A.tree, labels = c("A", "B", "C", "D"))
 ```
 
+In the 1989 - 1993 (A) and 1999 - 2006 (C) annual habitat data there is no clustering of native and non-native species. The 1999 - 2006 annual data appears at first glance to have a lot of native species that segregate separately from the non-native species, however these native species do not belong together in a common cluster and each of these native species has little to no records in this subset of the dataset (data not shown). This suggests that most of the native ladybeetles in this subset simply segregate separately from the non-native species because they are absent or nearly absent from the dataset.
 
+The other 2 time periods, 1994 - 1998 (B) and 2007 - 2012 (D), seem to show some segregation between native and non-native species on the tree. In both time periods however, there are one or two native species within the non-native species cluster.
+
+In annual habitats, these trees suggest that there was no temporal partitioning between native and non-native species in the 1989 - 1993 and 1999 - 2006 time periods, but they do suggest some partitioning between native and non-native species in the 1994 - 1998 and 2007 - 2012 time periods.
 
 ```{r fig.height=6, fig.width=12}
 # Plot the trees for each time period in the perennial habitat together as a single figure
@@ -630,7 +634,7 @@ plot_grid(T1.A.tree, T2.A.tree, T3.A.tree, T4.A.tree, labels = c("A", "B", "C", 
 plot_grid(T1.P.tree, T2.P.tree, T3.P.tree, T4.P.tree, labels = c("A", "B", "C", "D"))
 ```
 
-
+There does 
 
 
 > A final note for these tree analyses: I wonder if part of the differences between species on the tree might reflect differences in the dates each species was sampled (i.e if some species only have data recorded for certain parts of the year while other species have data recorded for other parts of the year then maybe the pairwise distances between them partly reflect that?). Perhaps we could do histograms for the distributions of observation dates for the different species to see if there's any major differences.
