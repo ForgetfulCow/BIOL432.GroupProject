@@ -240,7 +240,7 @@ LadyBugData <- LadyBugData %>%
 ```
 
 
-# Custom Function for ggplot Theme
+## Custom Function for ggplot Theme
 
 This function will create a custom theme for our ggplots.
 ```{r}
@@ -277,7 +277,7 @@ ggplot(LadyBugData, aes(x = DOY, y = Adults)) +
 
 Clearly abundance does vary over time, but not necessarily exactly according to month. Let's examine how well this pattern holds for individual species as well as native vs non-native assemblages.
 
-# Temporal abundance of native vs non-native ladybeetles
+## Temporal abundance of native vs non-native ladybeetles
 
 Plotting abundance w/ native and non-native groupings
 ```{r}
