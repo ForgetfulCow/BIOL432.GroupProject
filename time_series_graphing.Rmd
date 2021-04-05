@@ -10,9 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 Custom theme for graphs
-```{r eval=FALSE} 
-# eval=FALSE is used in order to show code but not include long output generated
-
+```{r} 
 theme_custom <- function () {
   # Using theme_minimal as a base. Will replace elements that we want to change.
   theme_minimal() %+replace% 
