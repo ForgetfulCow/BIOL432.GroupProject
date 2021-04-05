@@ -2,7 +2,12 @@
 title: "Group Project BIOL432"
 author: "R&B(ioinformatics)"
 date: "06/04/2021"
-output: html_document
+output:
+  html_document:
+    toc: true
+    number_section: true
+    toc_float:
+      collapsed: false
 ---
 
 # Project Info
@@ -39,23 +44,30 @@ There are 13 species of Ladybeetle documented in this study. 9 species are nativ
 2. Spotted Lady Beetle - [Coleomegilla maculata](https://biocontrol.entomology.cornell.edu/predators/Coleomegilla.php) 
 ![C. maculata](Images/C. maculata.jpeg)
 
+
 3. Twice stabbed ladybug - [Chilocorus stigma](https://www.discoverlife.org/mp/20q?search=Chilocorus+stigma)
 ![C. stigma](Images/C.stigma.jpeg)
+
 
 4. Three-banded ladybeetle - [Coccinella trifasciata](https://www.discoverlife.org/mp/20q?search=Coccinella+trifasciata)
 ![C. trifasciata](Images/C.trifasciata.jpeg)
 
+
 5. Polished/spotless ladybeetle - [Cycloneda munda](https://bugguide.net/node/view/472564)
 ![C. munda](Images/C. munda.jpeg)
+
 
 6. Convergent ladybeetle - [Hippodamia convergens](https://en.wikipedia.org/wiki/Hippodamia_convergens)
 ![H. convergens](Images/H. convergens.jpeg)
 
+
 7. Glacial ladybeetle - [Hippodamia glacialis](https://www.discoverlife.org/mp/20q?search=Hippodamia+glacialis)
 ![H. glacialis](Images/H.glacialis.jpeg)
 
+
 8. Parenthesis ladybeetle -[ Hippodamia parenthesis](https://www.discoverlife.org/mp/20q?search=Hippodamia+parenthesis&guide=Ladybug&cl=llp)
 ![H. parenthesis](Images/H. parenthesis.jpeg)
+
 
 9. Thirteen-spot ladybeetle - [Hippodamia tredecimpunctata](https://www.jungledragon.com/specie/13740/thirteen-spot_ladybird.html)
 ![H. tredecimpunctata](Images/H.tredecimpunctata.jpeg)
@@ -67,11 +79,14 @@ There are 13 species of Ladybeetle documented in this study. 9 species are nativ
 1. Seven-spot ladybeetle - [Coccinella septempunctata](https://kids.kiddle.co/Coccinella_septempunctata)
 ![C. septempunctata](Images/C. septempunctata.jpeg)
 
+
 2. Harlequin/Asian ladybeetle - [Harmonia axyridis](https://davesgarden.com/guides/bf/go/4139/#b)
 ![H. axyridis](Images/H.axyridis.jpeg)
 
+
 3. Variegated ladybeetle - [Hippodamia variegata](https://bugguide.net/node/view/352609)
 ![H. variegata](Images/H. variegata.jpeg)
+
 
 4. 14-spotted ladybeetle - [Propylea quatuordecimpunctata](https://www.inaturalist.org/taxa/61532-Propylea-quatuordecimpunctata)
 ![P. quatuordecimpunctata](Images/P.quatuordecimpunctata.jpeg)
@@ -115,33 +130,107 @@ library(tidyr)
 library(ggplot2)
 library(vegan)
 library(reshape2)
+library(cowplot)
 library(ape)
 library(ggtree)
 ```
 
 ## Load Dataset
 ```{r}
-LadyBugData <- read.csv("BIOL432.Data.GroupProject.csv")
+dat <- read.csv("BIOL432.Data.GroupProject.csv")
 ```
 
 ## Visualise Raw Data
 ```{r}
-head(LadyBugData)
+head(dat)
 ```
 
 ```{r}
+tail(dat)
+```
+
+```{r}
+summary(dat) #view summary for each variable in dataset
+```
+
+## Using Regex in Unix to change SpeciesID into modified scientific name
+
+The code chunk below creates a new csv file with the updated scientific names converted using regex expressions
+```
+#!/bin/bash
+
+#Date:04/01/2021
+#Author: Yudong Liu 
+#Purpose: This bash script is written to test if we can substitute species ID with their names
+
+awk '{gsub(/ABIPN/, "A. bipunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CMAC/, "C. maculata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CSTIG/, "C. stigma");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CTRIF/, "C. trifasciata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CMUND/, "C. munda");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HCONV/, "H. convergens");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HGLAC/, "H. glacialis");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HTRE/, "H. tredecimpunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/CSEPT/, "C. septempunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HAXY/, "H. axyridis");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HVAR/, "H. variegata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/HPARN/, "H. parenthesis");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+awk '{gsub(/PQUA/, "P. quatuordecimpunctata");print}' BashTest4.csv > New.csv &&
+mv New.csv BashTest4.csv
+
+
+#End
+
+```
+
+## Upload updated file
+
+Using the bash script above, a new csv file was created with the changed species names. In order to decrease computational time and difficulty, the resultant file is uploaded in the code chunk below. 
+
+```{r}
+LadyBugData <- read.csv("BashTest4.csv")
+```
+
+Inspect updated file
+```{r}
+head(LadyBugData)
 tail(LadyBugData)
 ```
-
 ```{r}
-summary(LadyBugData) #view summary for each variable in dataset
+summary(LadyBugData)
 ```
 
-## Making A Custom Function
 
-This function will create a custom theme for our ggplots. 
+## Custom Function for ggplot Theme
 
-```{r}
+This function will create a custom theme for our ggplots.
+```{r eval=FALSE} 
+# eval=FALSE is used in order to show code but not include long output generated
+
 theme_custom <- function () {
   # Using theme_minimal as a base. Will replace elements that we want to change.
   theme_minimal() %+replace% 
@@ -158,57 +247,8 @@ theme_custom <- function () {
 }
 ```
 
-# Is there temporal niche partitioning among native species and among non-native species? Is there temporal niche partitioning between native and non-native species?
 
-## Make plots to cluster the species by similarity in their presence/absence by DOY.
-
-Note that this does not tell us if the species partition resources 'seasonally', but it should tell us if there is any temporal partitioning between species or between natives and non-natives by DOY.
-
-I initially used presence/absence instead of abundance, and then tried abundance.
-
-- I figured that because Non-native species are so much more abundant than native species in general, clusters in the analysis might just reflect this difference in abundance. I think presence/absence should give us a better idea of differences between species in terms of their occurence throughout the year.
-
-- Still, it's worth noting that the traps are more likely to catch the most abundant species, so the plots will still be biased towards finding differences between abundant and non-abundant species.
-
-### Create a function to use Regex coding to change speciesID into scientific name 
-```{r}
-changeID <- function(dataframe, speciesIDCode, SpeciesName, column){
-  dataframe$SpeciesID <- gsub(speciesIDCode, SpeciesName,dataframe$SpeciesID)
-  return(dataframe)
-}
-```
-
-## Change all speciesID names
-```{r}
-#ABIPN 
-LadyBugData <- changeID(LadyBugData, "ABIPN", "A. bipunctata")
-#CMAC
-LadyBugData <- changeID(LadyBugData, "CMAC", "C. maculata")
-#CSTIG
-LadyBugData <- changeID(LadyBugData, "CSTIG", "C. stigma")
-#CTRIF
-LadyBugData <- changeID(LadyBugData, "CTRIF", "C. trifasciata")
-#CMUND
-LadyBugData <- changeID(LadyBugData, "CMUND", "C. munda")
-#HCONV
-LadyBugData <- changeID(LadyBugData, "HCONV", "H. convergens")
-#HGLAC
-LadyBugData <- changeID(LadyBugData, "HGLAC", "H. glacialis")
-#HPARN
-LadyBugData <- changeID(LadyBugData, "HPARN", "H. parenthesis")
-#HTRE
-LadyBugData <- changeID(LadyBugData, "HTRE", "H. tredecimpunctata")
-#CSEPT
-LadyBugData <- changeID(LadyBugData, "CSEPT", "C. septempunctata")
-#HAXY
-LadyBugData <- changeID(LadyBugData, "HAXY", "H. axyridis")
-#HVAR
-LadyBugData <- changeID(LadyBugData, "HVAR", "H. variegata")
-#PQUA
-LadyBugData <- changeID(LadyBugData, "PQUA", "P. quatuordecimpunctata")
-```
-
-Creating native and non-native groups
+## Create native and non-native groups in the dataset
 ```{r}
 # Create another column in the dataset that assigns non-native species to the 'Non-native' group and assign all other species to the 'Native' group
 LadyBugData <- LadyBugData %>%
@@ -219,20 +259,24 @@ LadyBugData <- LadyBugData %>%
                                "Non-native", "Native"))
 ```
 
+# Is there temporal niche partitioning among native species and among non-native species? Is there temporal niche partitioning between native and non-native species?
 
-##### Make sure to subset by invasion period and aphid outbreak period later
+## Make trees to cluster the species by differences in abundance by DOY
 
+To determine if there is temporal niche partitioning between species, we first attempt to cluster the species by differences in abundance for each day of the year (DOY) (pooled across all years within a given time frame). The clustering method we chose was the neighbour-joining (NJ) tree method. We predict that this will reveal any differences in the temporal patterns of abundance between species. This does not tell us if species partition resources 'seasonally', i.e. the clusters will not reveal specific time periods when certain species become more abundant and other species become less abundant. However, the trees should indicate which species are similar to each other in terms of their temporal patterns of abundance and which are dissimilar.
+
+*Maybe make a note that we tried NMDS, but decided it doesn't make sense*
 
 ### Make a data.frame indicating the native/non-native status of each species
 
-Will need this to compare native and non-native species
+Will need this later to colour code the species tree by native and non-native species to see if there are any clusters in abundance by DOY
 
 ```{r}
 # Select the species names and their corresponding status as native or non-native from the original dataset, and remove the duplicate rows using the distinct() function from dplyr
 SpeciesOrigin <- LadyBugData %>% select(SpeciesID, Species_type) %>% distinct()
 ```
 
-### Plot histograms of the count data
+### Plot histograms of the abundance data
 
 ```{r}
 # Plot counts for the raw abundance data (for each observation)
@@ -246,9 +290,11 @@ There is a wide range in abundances. It is possible that certain species might b
 LadyBugData %>% group_by(SpeciesID) %>% summarise(totalAbun = sum(Adults, na.rm = TRUE))
 ```
 
-Certain species are indeed far more common in the dataset than others. Log-transforming the dataset might allow us to de-emphasize the importance of 
+Certain species are indeed far more common in the dataset than others. Log-transforming the dataset might allow us to de-emphasize the importance of highly abundant species so that rare species can have more influence in the analysis. This is especially important for comparing native and non-native species because two of the most abundant species in the dataset are non-native (*C. septempuncta* and *H. axyridis*). If raw abundance data is analyzed, the clusters in the trees might just reflect differences in abundance instead of differences in temporal patterns of abundance between species.
 
-See how the distribution of abundances looks with log transformations:
+- *Still, it's worth noting that the traps are more likely to catch the most abundant species, so the plots will still be biased towards finding differences between abundant and non-abundant species.* This is probably important to mention somewhere, probably in the discussion
+
+See how the distribution of abundances looks with different log transformations:
 ```{r}
 # Add 1 to each abundance value prior to log transforming to prevent 0 values from becoming undefined. Since logx(1), where x is any base, equals 0, the 0 abundance values will simply return to being 0.
 # Higher log bases give less weight to more abundant species and let rare species have more influence.
@@ -267,200 +313,285 @@ ggplot(LadyBugData, aes(x=log((Adults + 1), base = 5), y=..count..)) +
 ggplot(LadyBugData, aes(x=log((Adults + 1), base = 10), y=..count..)) +
   geom_histogram() +
   scale_x_continuous(name = "log10(Adults)")
-
-# log base = Inf scales the data to pure presence/absence in the decostand function
-ggplot(LadyBugData, aes(x=decostand(Adults, method = "log", logbase = Inf, na.rm = T)), y=..count..)+
-  geom_histogram() +
-  scale_x_continuous(name = "log.Inf(Adults)")
 ```
 
-For now let's try a log5(x+1) transformation of the abundance data. It should be pretty easy to switch between the transformations though.
+For the following analyses we chose to use a log5(x+1) transformation of the abundance data. Inreasing the log transformation to log15(x+1) had no effect on the topologies of the habitat-subsetted trees (including all years) below.
 
-### Try clustering the abundance data using distance matrices and neighbor-joining trees
+For at least one tree (forest data, including all years), switching from log transformed data to the raw abundance data had little effect on the topology. It is interesting though that the only effect of switching to the raw abundance data is that 2 non-native species (*C. septempunctata* and *H. axyridis*) became closer to each other, probably reflecting their high abundance relative to most of the other species (data not shown).
 
-#### Try abundance data instead:
 ```{r}
-# Log transform the abundance data using decostand? from the vegan package
+# Log transform the abundance data with the transformation log5(x+1)
 logTLadyBug <- LadyBugData %>%
   mutate(logTAdults = log((Adults + 1), base = 5)) %>%  # transform with log5
   select(-Adults) # Replace Adults with logTAdults
+```
+
+### Custom Functions for Creating the Trees
+
+This funtion creates distance matrices for pairwise comparisons in abundance by DOY (day of year) between species:
+```{r}
+# This function is applied after the abundance data is log transformed, pooled across the years within groups of DOY + SpeciesID + TYPE, and subsetted by habitat type and/or time period
+
+mk_distmat <- function(sum_abun_dat){
   
-#logTLadyBug <- LadyBugData %>%
-#  mutate(logTAdults = decostand(LadyBugData$Adults, method = "log", 
-#                                logbase = Inf, na.rm = T)) %>%  # make abundance data presence/absence
-#  select(-Adults) # Replace Adults with logTAdults
+  # Make a matrix of species abundances where the rows are the individual species and the columns are days of the year (DOY) for each habitat type:
+  
+  sum_abun_dat <- sum_abun_dat %>% pivot_wider(names_from = DOY, values_from = SumAbun) # Rearrange the dataset so abundance data is arranged as separate DOY columns
+  sum_abun_dat <- data.frame(sum_abun_dat) # Convert from grouped data to a regular data.frame object
+  row.names(sum_abun_dat) <- sum_abun_dat$SpeciesID # Set the SpeciesIDs as the row names in the data.frame
+  sum_abun_dat <- sum_abun_dat %>% select(-SpeciesID, -TYPE) # Remove speciesID and habitat type from dataset so dist() can be run on it
+  
+  # Make the distance matrix:
+  
+  distmat <- vegdist(sum_abun_dat, method = "bray", na.rm = TRUE) # Use Bray-Curtis dissimilarity to calculate distance matrix. Na values were removed to allow vegdist() to work
+  
+  return(distmat)
+}
+```
 
-# Could add a step here to split the dataset into subsets for relevant time periods. Would have to do the following steps separately for each time period.
+This function plots the distance matrices as heat maps:
+```{r}
+# This function makes heat maps that display the distance matrices with white representing no difference in temporal abundance between species and red representing the highest pairwise distance between species
 
-# Pool the abundance data for station, plot, treatment, across the years within groups of DOY + SpeciesID + TYPE
+p_dist <- function(distmat){
+  Pdat <- melt(as.matrix(distmat)) # Linearize the distance matrix so that it lists the pairwise combinations of species with their distances
+  hMap <- ggplot(data = Pdat, aes(x=Var1, y=Var2, fill = value)) +
+    geom_tile() + # Makes heat map
+    scale_fill_gradientn(colours=c("white","blue","green","red")) + # Assigns colours to distance values
+    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) # Makes axis labels readable
+  return(hMap)
+}
+```
+
+This function creates neighbour-joining (NJ) trees from a distance matrix:
+```{r}
+# This function makes the NJ trees and plots them as well
+
+mk_tree <- function(distmat, dat = SpeciesOrigin){
+  tree <- njs(distmat) # njs allows for missing values in the distance matrix
+  pTree <- ggtree(tree, layout = "rectangular") %<+% dat + # Use SpeciesOrigin data.frame to colour-code the species by Species_type (Native or Non-native)
+    geom_tiplab(aes(colour = Species_type)) +
+    scale_colour_discrete(direction = -1) + # Make non-natives red and natives blue, which is the opposite of the default colour scheme
+    xlim_tree(1) # Set x-axis limits for the tree so that the tip-labels don't get cut off
+  return(pTree)
+}
+```
+
+
+### Subset by habitat type
+
+There are 3 habitat types:
+
+- forest
+
+- annual cropland
+
+- perennial cropland
+
+```{r}
+# Pool the abundance data across the years within groups of DOY + SpeciesID + TYPE
 datAbunSum <- logTLadyBug %>% group_by(DOY, SpeciesID, TYPE) %>% summarize(SumAbun = sum(logTAdults, na.rm = TRUE))
 
-# Make matrices of species abundances where the rows are the individual species and the columns are days of the year (DOY) for each habitat type
-
-# For forest habitat:
-forest.specDOY <- datAbunSum %>% filter(TYPE == "forest") %>% 
-  pivot_wider(names_from = DOY, values_from = SumAbun) # Rearrange data.frame so abundance data is arranged as separate DOY columns
-
-forest.specDOY <- data.frame(forest.specDOY) # Convert from grouped data to a regular data.frame object
-
-row.names(forest.specDOY) <- forest.specDOY$SpeciesID
-
-forest.specDOY <- data.frame(forest.specDOY) %>% select(-SpeciesID, -TYPE) # Remove speciesID and habitat type from dataset so dist() can be run on it
+# Subset the data by habitat type
+forestAbunSum <- datAbunSum %>% filter(TYPE == "forest")
+annualAbunSum <- datAbunSum %>% filter(TYPE == "annual")
+perennialAbunSum <- datAbunSum %>% filter(TYPE == "perennial")
 ```
 
+Create distance matrices and neighbor-joining trees:
+```{r fig.height=7, fig.width=10, warning=FALSE}
+# Make distance matrices using the custom mk_distmat() function
+forest.dist <- mk_distmat(forestAbunSum)
+annual.dist <- mk_distmat(annualAbunSum)
+perennial.dist <- mk_distmat(perennialAbunSum)
 
+# Make heat maps that display the distance matrices with white representing no difference in temporal abundance between species and red representing the highest pairwise distance between species
+# Use the custom p_dist() function to do this
+forest.hMap <- p_dist(forest.dist)
+annual.hMap <- p_dist(annual.dist)
+perennial.hMap <- p_dist(perennial.dist)
+
+# Plot the heat maps for each habitat type subset together as a single figure
+plot_grid(forest.hMap, annual.hMap, perennial.hMap, labels = c("A", "B", "C"))
+```
+Figure 1.
+
+```{r fig.height=6, fig.width=12}
+# Make the trees
+forest.pT <- mk_tree(forest.dist)
+annual.pT <- mk_tree(annual.dist)
+perennial.pT <- mk_tree(perennial.dist)
+
+# Plot the trees for each habitat type subset together as a single figure
+plot_grid(forest.pT, annual.pT, perennial.pT, labels = c("A", "B", "C"))
+```
+Figure 2.
+
+### Subset the habitat types by time period
+
+There are 4 time periods defined by the presence of non-native ladybeetles and soybean aphid outbreaks:
+
+- 1989 - 1993 (T1): one non-native ladybeetle present
+
+- 1994 - 1998 (T2): two non-native ladybeetles present
+
+- 1999 - 2006 (T3): three non-native ladybeetles present + soybean aphid outbreaks
+
+- 2007 - 2012 (T4): four non-native ladybeetles present + soybean aphids present
+
+Subset the data:
 ```{r}
-# Make distance matrix
-forest.dist <- vegdist(forest.specDOY, method = "bray", na.rm = TRUE) # For now try bray-curtis dissimilarity. Will later try to find alternate distance of dissimilarity metrics in vegdist that control for biases caused by excessive abundance in particular species
+# Split the dataset into subsets for relevant time periods. Then repeat the above analyses for each habitat type in each time period
 
-# Display distance matrix with white representing no difference in temporal abundance between species and red representing the highest pairwise distance between species
-PFdat <- melt(as.matrix(forest.dist))
-ggplot(data = PFdat, aes(x=Var1, y=Var2, fill = value)) +
-  geom_tile() +
-  scale_fill_gradientn(colours=c("white","blue","green","red")) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) 
+T1 <- logTLadyBug %>% filter(Year == c(1989:1993))
+T2 <- logTLadyBug %>% filter(Year == c(1994:1998))
+T3 <- logTLadyBug %>% filter(Year == c(1999:2006))
+T4 <- logTLadyBug %>% filter(Year == c(2007:2012))
+
+# Pool the abundance data for station, plot, treatment, across the years within groups of DOY + SpeciesID + TYPE
+T1AbunSum <- T1 %>% group_by(DOY, SpeciesID, TYPE) %>% summarize(SumAbun = sum(logTAdults, na.rm = TRUE))
+T2AbunSum <- T2 %>% group_by(DOY, SpeciesID, TYPE) %>% summarize(SumAbun = sum(logTAdults, na.rm = TRUE))
+T3AbunSum <- T3 %>% group_by(DOY, SpeciesID, TYPE) %>% summarize(SumAbun = sum(logTAdults, na.rm = TRUE))
+T4AbunSum <- T4 %>% group_by(DOY, SpeciesID, TYPE) %>% summarize(SumAbun = sum(logTAdults, na.rm = TRUE))
+
+# Subset the pooled abundance data for each time period by habitat type
+T1.F.AbunSum <- T1AbunSum %>% filter(TYPE == "forest") # This subset will not be analyzed. The forest site only started getting sampled in 1993. There are only 16 observations, and the pooled abundances are all 0 values, so it is not possible to see how the species cluster in DOY abundance.
+T1.A.AbunSum <- T1AbunSum %>% filter(TYPE == "annual")
+T1.P.AbunSum <- T1AbunSum %>% filter(TYPE == "perennial")
+
+T2.F.AbunSum <- T2AbunSum %>% filter(TYPE == "forest") # This subset could not be analyzed with an NJ tree. See below (where the trees are made) for details.
+T2.A.AbunSum <- T2AbunSum %>% filter(TYPE == "annual")
+T2.P.AbunSum <- T2AbunSum %>% filter(TYPE == "perennial")
+
+T3.F.AbunSum <- T3AbunSum %>% filter(TYPE == "forest")
+T3.A.AbunSum <- T3AbunSum %>% filter(TYPE == "annual")
+T3.P.AbunSum <- T3AbunSum %>% filter(TYPE == "perennial")
+
+T4.F.AbunSum <- T4AbunSum %>% filter(TYPE == "forest")
+T4.A.AbunSum <- T4AbunSum %>% filter(TYPE == "annual")
+T4.P.AbunSum <- T4AbunSum %>% filter(TYPE == "perennial")
 ```
-With log10 transformation all the species are really distinct from each other.
-This makes sense because taking differences in abundance into account should amplify the differences between species relative to just presence/absence.
 
-The distance between HTRE and HCONV seems undefined. Let's see how well represented they are in the forest subset:
-```{r}
-# Sum up the DOY abundnaces for each species
-rowSums(forest.specDOY, na.rm=T)
+Make distance matrices from DOY species abundances for each time period in each habitat type:
+```{r fig.height=7, fig.width=10, warning=FALSE}
+# Make distance matrices using the custom mk_distmat() function
+T1.A.dist <- mk_distmat(T1.A.AbunSum)
+T1.P.dist <- mk_distmat(T1.P.AbunSum)
+
+T2.F.dist <- mk_distmat(T2.F.AbunSum)
+T2.A.dist <- mk_distmat(T2.A.AbunSum)
+T2.P.dist <- mk_distmat(T2.P.AbunSum)
+
+T3.F.dist <- mk_distmat(T3.F.AbunSum)
+T3.A.dist <- mk_distmat(T3.A.AbunSum)
+T3.P.dist <- mk_distmat(T3.P.AbunSum)
+
+T4.F.dist <- mk_distmat(T4.F.AbunSum)
+T4.A.dist <- mk_distmat(T4.A.AbunSum)
+T4.P.dist <- mk_distmat(T4.P.AbunSum)
+
+# Make heat maps that display the distance matrices with white representing no difference in temporal abundance between species and red representing the highest pairwise distance between species
+# Use the custom p_dist() function to do this
+T1.A.hMap <- p_dist(T1.A.dist)
+T1.P.hMap <- p_dist(T1.P.dist)
+
+T2.F.hMap <- p_dist(T2.F.dist)
+T2.A.hMap <- p_dist(T2.A.dist)
+T2.P.hMap <- p_dist(T2.P.dist)
+
+T3.F.hMap <- p_dist(T3.F.dist)
+T3.A.hMap <- p_dist(T3.A.dist)
+T3.P.hMap <- p_dist(T3.P.dist)
+
+T4.F.hMap <- p_dist(T4.F.dist)
+T4.A.hMap <- p_dist(T4.A.dist)
+T4.P.hMap <- p_dist(T4.P.dist)
 ```
-HCONV and HTRE both have 0 observations. I think this results in undefined bray-curtis dissimilarity values. Undefined values do not occur when you switch the distance metric to 'euclidean', however 'euclidean' does not distinguish among the species as well. Also switching to euclidean doesn't seem to affect the topology of the tree much but the branch lengths become very uneven.
 
-
-```{r fig.height=6, fig.width=10}
-# Make Neighbor-joining tree
-forest.tree <- njs(forest.dist) # njs allows for missing values in the distance matrix
-
-ggtree(forest.tree, layout = "rectangular") %<+% SpeciesOrigin + # Use SpeciesOrigin data.frame to colour-code the species by Species_type (Native or Non-native)
-  geom_tiplab(aes(colour = Species_type)) +
-  scale_colour_discrete(direction = -1) + # Make non-natives red and natives blue, which is the opposite of the default
-  xlim_tree(0.65) # Set x-axis limits for the tree so that the tip-labels don't get cut off
+Plot the heat maps by time period for each habitat type together as a single figure
+```{r fig.height=7, fig.width=10}
+# Plot the heat maps for each time period in the forest habitat together as a single figure
+# Note that there was too little data for the forest habitat in the first time period do it is not analyzed.
+plot_grid(T2.F.hMap, T3.F.hMap, T4.F.hMap, labels = c("A", "B", "C"))
 ```
-Some notes about what happened when I tried switching log transformations:
-
-- Switching from the log5(x+1) transformation to the raw abundance data gave almost identical trees. The only difference was that C. septempunctata became closer to H. axyridis than C. munda.
-- log5(x+1) and log10(x+1) transformations give identical trees
 
 
-Tried using NMDS (it doesn't work if you set distance method to bray-curtis dissimilarity)
+```{r fig.height=7, fig.width=10}
+# Plot the heat maps for each time period in the annual habitat together as a single figure
+plot_grid(T1.A.hMap, T2.A.hMap, T3.A.hMap, T4.A.hMap, labels = c("A", "B", "C", "D"))
+```
 
 
-metaMDS() returns the warning: 'stress is (nearly) zero: you may have insufficient data'. Try plotting it anyways to see what it looks like.
+```{r fig.height=7, fig.width=10}
+# Plot the heat maps for each time period in the annual habitat together as a single figure
+plot_grid(T1.P.hMap, T2.P.hMap, T3.P.hMap, T4.P.hMap, labels = c("A", "B", "C", "D"))
+```
+
+Make trees from the distance matrices for each time period in each habitat type:
+```{r fig.height=6, fig.width=12}
+# Make the trees. Use the custom mk_tree() function to do this
+forest.pT <- mk_tree(forest.dist)
+annual.pT <- mk_tree(annual.dist)
+perennial.pT <- mk_tree(perennial.dist)
+
+T1.A.tree <- mk_tree(T1.A.dist)
+T1.P.tree <- mk_tree(T1.P.dist)
+
+# T2.F.tree <- mk_tree(T2.F.dist) An njs tree could not be constructed for the forest data in time period 2. This is because the distance information was insufficient to construct a tree (see the high number of pairwise distances that could not be calculated for this subset — gray boxes in the corresponding heat map)
+T2.A.tree <- mk_tree(T2.A.dist)
+T2.P.tree <- mk_tree(T2.P.dist)
+
+T3.F.tree <- mk_tree(T3.F.dist)
+T3.A.tree <- mk_tree(T3.A.dist)
+T3.P.tree <- mk_tree(T3.P.dist)
+
+T4.F.tree <- mk_tree(T4.F.dist)
+T4.A.tree <- mk_tree(T4.A.dist)
+T4.P.tree <- mk_tree(T4.P.dist)
+```
 
 
+```{r fig.height=6, fig.width=12}
+# Plot the trees for each time period in the forest habitat together as a single figure
+plot_grid(T3.F.tree, T4.F.tree, labels = c("A", "B"))
+```
 
 
+```{r fig.height=6, fig.width=12}
+# Plot the trees for each time period in the forest habitat together as a single figure
+plot_grid(T1.A.tree, T2.A.tree, T3.A.tree, T4.A.tree, labels = c("A", "B", "C", "D"))
+```
 
-It seems like the NMDS coordinates have really small variation compared to the plots from tutorials and assignments. I wonder if it might have to do with the relatively small number of pairwise comparisons made in the distance matrix (13x13=169) - at least that's my best guess from googling.
 
-Also, the bottom of the documentation page for metaMDS() (under 'Note') says that the default values for the metaMDS function are designed for use with community data (which I assume would mean having species compositions in the rows of the dataset that the distance matrix is built from instead of DOY abundances as I have it here). So regardless of the above point it's probably best not to run NMDS on the dataset as I have it set up above.
+```{r fig.height=6, fig.width=12}
+# Plot the trees for each time period in the forest habitat together as a single figure
+plot_grid(T1.P.tree, T2.P.tree, T3.P.tree, T4.P.tree, labels = c("A", "B", "C", "D"))
+```
 
-So there's 3 options (that I can think of anyways):
+So there's a couple alternatives to clustering by trees:
 
 1. Try a PCoA plot to cluster the data instead (seemed to be suggested when I tried googling the warning "stress is (nearly) zero: you may have insufficient data"). If we do this, it'll be good to say why we didn't use NMDS. Downside is that we didn't cover it in class, so the prof and TAs might not like that?
 
 ###### I think our way around this is to leave the current NMDS plots and code in our report and just dont run it - that way we can show we tried it but after research found a better fit method. 
 
-2. Just cluster the data based off trees (probably easiest).
+2. If we still want to do NMDS: Build a distance matrix from a dataset more similar to what we did in class, with species compositions across the columns instead of DOY abundances. *The only issue is that we wouldn't be able to colour the tree or NMDS plot by native vs non-native* because we wouldn't be comparing individual species for differences in abundance patterns, instead each row in the dataset would represent species composition (which can't be classified as native or non-native). So it wouldn't tell us if there's temporal partitioning by DOY between species or native and non-native species, it would only tell us if there different times of year have distinct species compositions.
 
-3. If we still want to do NMDS: Build a distance matrix from a dataset more similar to what we did in class, with species compositions across the columns instead of DOY abundances. *The only issue is that we wouldn't be able to colour the tree or NMDS plot by native vs non-native* because we wouldn't be comparing individual species for differences in abundance patterns, instead each row in the dataset would represent species composition (which can't be classified as native or non-native). So it wouldn't tell us if there's temporal partitioning by DOY between species or native and non-native species, it would only tell us if there different times of year have distinct species compositions.
-
-If we do option 3 we need to decide what each row should be:
-
-- One option is to have each row be DOY (then colour by month or a gradient from low to high DOY so we can more easilly see how different parts of the year cluster or if the DOY species compositions seem randomly dispersed).
-
-
-I also tried doing the above analysis by summing abundance for each day of each year instead of each day across the years:
-```{r}
-# Log transform the abundance data using decostand? from the vegan package
-logTLadyBug <- LadyBugData
-logTLadyBug <- LadyBugData %>%
-  mutate(logTAdults = decostand(LadyBugData$Adults, method = "log", 
-                                logbase = 10, na.rm = T)) %>%  # transform with log10
-  select(-Adults) # Replace Adults with logTAdults
-
-# Could add a step here to split the dataset into subsets for relevant time periods. Would have to do the following steps separately for each time period.
-
-# Pool abundance data for each day of each year for each species and for each habitat type
-
-datYrDOY <- logTLadyBug %>%
-  mutate(yrDOY = paste(as.factor(Year), as.factor(DOY), sep = ".")) %>% # Create a variable that combines the year and the DOY
-  group_by(SpeciesID, TYPE, yrDOY) %>% summarize(SumAbun = sum(logTAdults, na.rm = TRUE)) %>% # Sum the abundances by species, habitat type, and yrDOY (i.e. pooling observations from each station, plot, and treatment within the species + habitat type + yrDOY groups)
-  pivot_wider(names_from = yrDOY, values_from = SumAbun) # Rearrange data.frame so abundance data is arranged as separate yrDOY columns
-
-# For each habitat type, make matrices of species abundance where the rows are the individual species and the columns are yrDOY
-
-# For forest habitat:
-forest.specYrDOY <- datYrDOY %>% filter(TYPE == "forest")
-
-forest.specYrDOY <- data.frame(forest.specYrDOY) # Convert from grouped data to a regular data.frame object
-
-row.names(forest.specYrDOY) <- forest.specYrDOY$SpeciesID
-
-forest.specYrDOY <- data.frame(forest.specYrDOY) %>% select(-SpeciesID, -TYPE) # Remove speciesID and habitat type from dataset so dist() can be run on it
-
-head(forest.specYrDOY)
-```
-
-
-```{r}
-# Make distance matrix
-forest.dist <- vegdist(forest.specYrDOY, method = "bray", na.rm = TRUE) # For now try bray-curtis dissimilarity. Will later try to find alternate distance of dissimilarity metrics in vegdist that control for biases caused by excessive abundance in particular species
-
-# Display distance matrix with white representing no difference in temporal abundance between species and red representing the highest pairwise distance between species
-PFdat <- melt(as.matrix(forest.dist))
-ggplot(data = PFdat, aes(x=Var1, y=Var2, fill = value)) +
-  geom_tile() +
-  scale_fill_gradientn(colours=c("white","blue","green","red")) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
-```
-
-More of the comparisons seem undefined now. I don't know why that is.
-
-```{r fig.height=6, fig.width=8}
-# Make Neighbor-joining tree
-forest.tree <- njs(forest.dist) # njs allows for missing values in the distance matrix
-
-ggtree(forest.tree, layout = "rectangular") %<+% SpeciesOrigin +
-  geom_tiplab(aes(colour = Native)) +
-  theme(legend.position = "right")
-```
 
 > A final note for these tree analyses: I wonder if part of the differences between species on the tree might reflect differences in the dates each species was sampled (i.e if some species only have data recorded for certain parts of the year while other species have data recorded for other parts of the year then maybe the pairwise distances between them partly reflect that?). Perhaps we could do histograms for the distributions of observation dates for the different species to see if there's any major differences.
 
 > To possibily address the above point (not sure if it actully does), I tried replacing the NA values in the forest.specDOY object with 0s using the values_fill argument in the pivot_wider() function, but that didn't change the tree that was based off DOY abundances. However the tree built from YrDOY abundances did have it's topology changed when the NAs were switched to 0, but still there was little change in the overall pattern of Non-native plants being scattered throughout the tree (with only CSEPT and HAXY being reasonably close).
 
-> It might also be worth trying the yrDOY abundance tree with the different log transformations. I don't think I tried but it's 2:00 am lol.
-
-
-
-### A plot for demonstration of the custom function
- 
-```{r}
-tempAbundancePlot <- ggplot(LadyBugData, aes(x = DOY, y = Adults)) +
-  scale_x_continuous(expand = c(0,0)) +
-  scale_y_continuous(expand = c(0,0)) +
-  geom_smooth() +
-  facet_wrap(~ TYPE) +
-  theme_bw()
-tempAbundancePlot
-```
-
 
 ## General temporal abundance patterns
 
-Plot ladybeetle abundance against the day of the year to determine if abundance varies at all over time. Display this data separately for each individual habitat type (annual, forest, perennial) because the sampling method used to capture the ladybeetles may have been more efficient in some habitats than other habitats *(find Bahlai et al 2013 and cite it)*.
+We plotted ladybeetle abundance against the day of the year to determine if abundance varies at all over time. We are displaying this data separately for each individual habitat type (annual, forest, perennial) because the sampling method used to capture the ladybeetles may have been more efficient in some habitats than other habitats.
 ```{r}
 ggplot(LadyBugData, aes(x = DOY, y = Adults)) +
   scale_x_continuous(expand = c(0,0)) +
   scale_y_continuous(expand = c(0,0)) +
   geom_smooth() +
   facet_wrap(~ TYPE) +
-  theme_bw()
+  theme_custom()
 ```
 
 
@@ -476,105 +607,16 @@ ggplot(LadyBugData, aes(x = DOY, y = Adults, colour = Species_type)) +
   geom_smooth() +
   facet_wrap(~ TYPE) +
   theme_bw()
-
-# Trying the same thing as above but with the log transformed dataset
-ggplot(logTLadyBug, aes(x = DOY, y = logTAdults, colour = Species_type)) +
-  scale_x_continuous(expand = c(0,0)) +
-  scale_y_continuous(expand = c(0,0)) +
-  geom_smooth() +
-  facet_wrap(~ TYPE) +
-  theme_bw()
 ```
 
 Non-native ladybeetles clearly have higher abundance throughout the entire year in most habitats. There doesn't seem to be strong patterns in forest habitat for native ladybeetles, but this might just be because they have such low abundance. Taking a look at abundance pre-invasion of the various exotic species should help show what's going on.
-
+\n
 Also, in annual crop habitats there seems to be a decline in non-native ladybeetle abundance and a concurrent increase in native ladybeetle abundance around 2/3 of the way through the year, lending support to our hypothesis of temporal niche partitioning.
+\n
+## Invasion time series temporal abundance patterns
 
+We are summarizing our findings here in a time series graph created using the cowplot package for concision. Code for the individual graphs and joining the graphs can be found in the "time_series_graphing.Rmd" file in the project folder.
 
-## Pre-invasion temporal abundance patterns
+![A = 1989 - 1993, B = 1994 - 1998, C = 1999 - 2006, D = 2007 - 2012](./abundance_timeseries.png)
 
-1989 - 1993: one non-native ladybeetles
-```{r}
-LadyBugData %>%
-  filter(Year == c(1989:1993), TYPE != "forest") %>% # Filter the desired years and remove forest data (forest site only started getting sampled in 1993, so there is not enough data for this time frame)
-  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
-  scale_x_continuous(expand = c(0,0)) +
-  scale_y_continuous(expand = c(0,0)) +
-  geom_smooth() +
-  facet_wrap(~ TYPE) +
-  theme_bw()
-```
-Native species are already low in abundance by this point, but seem to do well at the beginning and end of growing seasons.
-
-1994 - 1998: two non-native ladybeetles
-```{r}
-LadyBugData %>%
-  filter(Year == c(1994:1998)) %>% # Filtering desired years, forests were present by this time period so they are left in the dataset
-  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
-  scale_x_continuous(expand = c(0,0)) +
-  scale_y_continuous(expand = c(0,0)) +
-  geom_smooth(method = "gam") +
-  facet_wrap(~ TYPE) +
-  theme_bw()
-```
-
-There is a very interesting change in abundance patterns for annual crops. There is now a second peak in abundance on non-native species at the end of the growing season.
-
-Graphing by individual species (replace "Species_type" with "SpeciesID") shows that the increase in native abundance of is driven almost entirely by one species:
-```{r}
-LadyBugData$Adults <- as.numeric(LadyBugData$Adults)
-LadyBugData %>%
-  filter(Year == c(1994:1998)) %>% # Filtering desired years, forests were present by this time period so they are left in the dataset
-  ggplot(aes(x = DOY, y = Adults, colour = SpeciesID)) +
-  scale_x_continuous(expand = c(0,0)) +
-  scale_y_continuous(expand = c(0,0)) +
-  geom_smooth(method = "loess") +
-  facet_wrap(~ TYPE) +
-  theme_bw()
-```
-
-
-
-1999 - 2006: three non-native ladybeetles + soybean aphid outbreaks
-```{r}
-LadyBugData %>%
-  filter(Year == c(1999:2006)) %>% #filtering desired years
-  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
-  scale_x_continuous(expand = c(0,0)) +
-  scale_y_continuous(expand = c(0,0)) +
-  geom_smooth() +
-  facet_wrap(~ TYPE) +
-  theme_bw()
-```
-
-During this time period, a new, exotic ladybeetle species arrived and there were repeated soybean aphid outbreaks. Things get a little weird....
-
-2007 - 2012: four non-native ladybeetles + soybean aphids present
-```{r}
-LadyBugData %>%
-  filter(Year == c(2007:2012)) %>% #filtering desired years
-  ggplot(aes(x = DOY, y = Adults, colour = Species_type)) +
-  scale_x_continuous(expand = c(0,0)) +
-  scale_y_continuous(expand = c(0,0)) +
-  geom_smooth() +
-  facet_wrap(~ TYPE) +
-  theme_bw()
-```
-
-That pattern of mid to late season niche partitioning becomes very apparent in annual cropland. Potentially related to agricultural activities (e.g. harvest)? Digging into the patterns for specific treatment types might explain more.
-
-```{r}
-LadyBugData %>% filter(TYPE == "annual", Year == c(2007:2012)) %>% 
-  ggplot(aes(x = DOY, y = Adults, colour = TREAT_DESC)) +
-  scale_x_continuous(expand = c(0,0)) +
-  scale_y_continuous(expand = c(0,0)) +
-  geom_smooth(method = "loess", span = 1, se = F) +
-  facet_wrap(~ TYPE) +
-  theme_bw()
-```
-
-
-
-## Conclusion
-
-Overall, abundance certainly varies over time and we see some evidence for niche partitioning at this stage. Invasion of new species also definitely has an impact on patterns.
+Overall, native ladybeetle abundance is low compared to non-native species. In the early stages of invasion especially, the shoulder seasons seem to benefit native species. In addition, native species often reach peak abundance in annual habitat ~215 - 225 days into the year. In many cases, this increase in native species abundance corresponds with a decrease in non-native species abundance. This does not occur during the 1999-2006 period, however, possibly due to soybean aphid outbreaks during that time. For the most part in most habitats, however, native ladybeetle abundance do not seem to respond strongly to changes in non-native ladybeetle abundance.
