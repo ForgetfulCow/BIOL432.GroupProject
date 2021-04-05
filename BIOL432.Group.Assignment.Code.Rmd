@@ -290,9 +290,13 @@ ggplot(LadyBugData, aes(x = DOY, y = Adults, colour = Species_type)) +
 ```
 
 Non-native ladybeetles clearly have higher abundance throughout the entire year in most habitats. There doesn't seem to be strong patterns in forest habitat for native ladybeetles, but this might just be because they have such low abundance. Taking a look at abundance pre-invasion of the various exotic species should help show what's going on.
+
 \n
+
 Also, in annual crop habitats there seems to be a decline in non-native ladybeetle abundance and a concurrent increase in native ladybeetle abundance around 2/3 of the way through the year, lending support to our hypothesis of temporal niche partitioning.
+
 \n
+
 ## Invasion time series temporal abundance patterns
 
 We are summarizing our findings here in a time series graph created using the cowplot package for concision. Code for the individual graphs and joining the graphs can be found in the "time_series_graphing.Rmd" file in the project folder.
@@ -575,7 +579,7 @@ plot_grid(T1.A.hMap, T2.A.hMap, T3.A.hMap, T4.A.hMap, labels = c("A", "B", "C", 
 ```
 
 ```{r fig.height=7, fig.width=10}
-# Plot the heat maps for each time period in the annual habitat together as a single figure
+# Plot the heat maps for each time period in the perennial habitat together as a single figure
 # Perennial habitat. A = 1989 - 1993; B = 1994 - 1998; C = 1999 - 2006; D = 2007 - 2012.
 plot_grid(T1.P.hMap, T2.P.hMap, T3.P.hMap, T4.P.hMap, labels = c("A", "B", "C", "D"))
 ```
@@ -615,7 +619,7 @@ As noted in the comments in the code above, the 1989 - 1993 forest data could no
 There is no distinct clustering of native and non-native ladybeetle species in either the 1999 - 2006 or the 2007 - 2012 time periods. Both trees have a lot of polytomies, which suggests that the differences between the species in DOY abundance patterns are poorly resolved.
 
 ```{r fig.height=6, fig.width=12}
-# Plot the trees for each time period in the forest habitat together as a single figure
+# Plot the trees for each time period in the annual habitat together as a single figure
 # Annual habitat. A = 1989 - 1993; B = 1994 - 1998; C = 1999 - 2006; D = 2007 - 2012.
 plot_grid(T1.A.tree, T2.A.tree, T3.A.tree, T4.A.tree, labels = c("A", "B", "C", "D"))
 ```
@@ -623,7 +627,7 @@ plot_grid(T1.A.tree, T2.A.tree, T3.A.tree, T4.A.tree, labels = c("A", "B", "C", 
 
 
 ```{r fig.height=6, fig.width=12}
-# Plot the trees for each time period in the forest habitat together as a single figure
+# Plot the trees for each time period in the perennial habitat together as a single figure
 # Perennial habitat. A = 1989 - 1993; B = 1994 - 1998; C = 1999 - 2006; D = 2007 - 2012.
 plot_grid(T1.P.tree, T2.P.tree, T3.P.tree, T4.P.tree, labels = c("A", "B", "C", "D"))
 ```
