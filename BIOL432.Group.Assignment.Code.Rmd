@@ -7,7 +7,7 @@ output:
     toc: true
     number_section: true
     toc_float:
-      collapsed: false
+      collapsed: true
 ---
 
 # Project Info
@@ -94,33 +94,31 @@ There are 13 species of Ladybeetle documented in this study. 9 species are nativ
 
 **We seek to address the following questions:**
 
-*1. Within sampling years, does native and non-native species abundance change according to the month?*
+1. Within sampling years, does native and non-native species abundance change according to the month?
 
-- So should we move the temporal abundance stuff Cameron did up in the document? It might make sense to present all his findings first (which address all 3 question), then have the tree stuff as an alternate way we tried to test questions 2 & 3.
+2. Is there temporal niche partitioning between native and non-native species?
 
-2. Is there temporal niche partitioning among native species and among non-native species? Is there temporal niche partitioning between native and non-native species?
-
-3. Is there a change in seasonal partitioning before and after invasive species arrive?
+3. Is there a change in temporal partitioning before and after invasive species arrive?
 
 \n 
 
 **Hypotheses for each question: ** 
 
-1. **H0**: Native and non-native species abundance does not change according to the month within sampling years. **H1**: Native and non-native species abundance does change according to the month within sampling years. We suspect that native and non-native species abundance will change according to month because abundance may be impacted by environmental factors that vary seasonally. 
+1. **H0**: Native and non-native species abundance does not change with time within sampling years. **H1**: Native and non-native species abundance does change with time within sampling years. We suspect that native and non-native species abundance will change with time because abundance may be impacted by environmental factors that vary throughout different stages of the growing season. 
 
-2. **H0**: There is no temporal niche partitioning among native species and among non-native species. There is no temporal niche partitioning between native and non-native species. **H1**: There is temporal niche partitioning among native species and among non-native species. There is temporal niche partitioning between native and non-native species. We suspect that there will be temporal niche partitioning because native and non-native species may compete. 
+2. **H0**:There is no temporal niche partitioning between native and non-native species. **H1**: There is temporal niche partitioning between native and non-native species. We suspect that there will be temporal niche partitioning because native and non-native species may compete with each other.
 
-3. **H0**: There is no change in seasonal partitioning before and after invasive species arrive. **H1**: There is a change in seasonal partitioning before and after invasive species arrive. We suspect that there will be changes in seasonal partitioning before and after the arrival of invasive species (soybean aphids) because they may impact different species to different degrees. 
+3. **H0**: There is no change in seasonal partitioning before and after invasive species arrive. **H1**: There is a change in seasonal partitioning before and after invasive species arrive. We suspect that there will be changes in seasonal partitioning before and after the arrival of non-native ladybeetles and invasive soybean aphids because they represent major potential influences on lady beetle community dynamics. The arrival of soybean aphids may benefit certain species more than others as food source, and the arrival of non-native ladybeetles may impact different ladybeetle species to different degrees.
 
 \n 
 
 **Predictions for each question:** 
 
-1. If native and non-native species abundance changes according to the month within sampling years, then graphs will may show monthly changes in species abundance and clusters may show changes in lady beetle communities according to month. 
+1. If native and non-native species abundance changes with time within sampling years, then graphs should show monthly changes in species abundance. 
 
-2. If there is temporal niche partitioning among native and non-native species, then graphs and community clusters may show that when one species has high abundance, then another species will have lower abundance. If there is temporal niche partitioning between native and non-native species, then graphs and community clusters may show that when non-native species have high abundance, then native species have low abundance and vice versa. 
+2. If there is temporal niche partitioning between native and non-native species, then graphs should show that when non-native species have high abundance, native species have low abundance and vice versa. Another way to see if there is temporal niche partitioning between native and non-native species is by clustering the species by their temporal patterns in abundance within sampling years. If there is differences between native and non-native temporal patterns of abundance within sampling years, then they should cluster separately on a tree.
 
-3. If there is a change in seasonal partitioning before and after invasive species (soybean aphids) arrive, then graphs and community clusters will show changes in temporal niche partitioning. For example, non-native species may be at a high abundance during a month when they were previously low abundance. 
+3. If there is a change in seasonal partitioning before and after non-native lady beetles and invasive soybean aphids arrive, then graphs will show changes in temporal niche partitioning. For example, non-native species may be at a high abundance during a particular month when they were previously low abundance, or more generally there might not be seasonal partitioning at all between native and non-native species in one time period but seasonal partitioning could be present in another time period. When clustering the species by their temporal patterns in abundance within sampling years, differences between time periods in the presence or absence of seasonal partitioning would be observed as the presence or absence of distinct native and non-native species clusters, respectively.
 
 
 [GitHub Repository Link](https://github.com/alexrow15/BIOL432.GroupProject)
@@ -474,11 +472,11 @@ perennial.pT <- mk_tree(perennial.dist)
 # Plot the trees for each habitat type subset together as a single figure. A = forest; B = annual; C = perennial.
 plot_grid(forest.pT, annual.pT, perennial.pT, labels = c("A", "B", "C"))
 ```
-There appears to be negligible differentiation between native and non-native species in forest habitats and perennial habitats in terms of their DOY abundance patterns.
+There appears to be negligible differentiation between native and non-native species in forest habitats (A) and perennial habitats (C) in terms of their DOY abundance patterns.
 
 Annual habitats (B) show some association of non-native species with each other in their DOY abundance patterns, however there are also native species within the same cluster. Also, the distinction between the cluster that holds the non-native species and the cluster that contains most of other native species appears to be poorly resolved, as indicated by the short branch lengths near the root of the tree.
 
-Overall there seems to be little to no temporal partitioning between native and non-native ladybeetle species in any habitat.
+Overall there seems to be little to no temporal partitioning between native and non-native ladybeetle species in any habitat, except for perhaps some weak temporal partitioning in annual habitat.
 
 ### Subset the habitat types by time period
 
@@ -616,7 +614,7 @@ plot_grid(T3.F.tree, T4.F.tree, labels = c("A", "B"))
 
 As noted in the comments in the code above, the 1989 - 1993 forest data could not be analyzed because no ladybeetles were observed in this habitat during that time period (see the T1.F.AbunSum object), and the 1994 - 1998 forest data could not be analyzed with a NJ tree because there was not enough distance information to construct the tree.
 
-There is no distinct clustering of native and non-native ladybeetle species in either the 1999 - 2006 or the 2007 - 2012 time periods. Both trees have a lot of polytomies, which suggests that the differences between the species in DOY abundance patterns are poorly resolved.
+There is no distinct clustering of native and non-native ladybeetle species in either the 1999 - 2006 or the 2007 - 2012 time periods. Both trees have a lot of polytomies, which suggests that the differences between species in their DOY abundance patterns are poorly resolved.
 
 ```{r fig.height=6, fig.width=12}
 # Plot the trees for each time period in the annual habitat together as a single figure
