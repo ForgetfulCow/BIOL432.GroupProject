@@ -360,9 +360,9 @@ ggplot(LadyBugData, aes(x=log((Adults + 1), base = 10), y=..count..)) +
   scale_x_continuous(name = "log10(Adults)")
 ```
 
-For most trees, the only effect of switching to the raw abundance data is that 2 non-native species (*C. septempunctata* and *H. axyridis*) became closer to each other, probably reflecting their high abundance relative to most of the other species (data not shown).For at least one tree (forest data, including all years), switching from log transformed data to the raw abundance data had little effect on the topology.
+We tested the effect of switching between log-transformed and raw abundance data for the forest tree (including all years). There was little effect on the tree topology, but for the raw abundance data 2 of the non-native species (*C. septempunctata* and *H. axyridis*) became closer to each other, probably reflecting their high abundance relative to most of the other species (data not shown).
 
-Below, we present the analyses using the log5(x+1) transformation of the abundance data, as it appears to have limited the impact of the two most abundant species and had little other impact.
+Below, we present the analyses using the log5(x+1) transformation of the abundance data, as it appears to have at least slightly limited the impact highly abundant species.
 
 ```{r}
 # Log transform the abundance data with the transformation log5(x+1)
