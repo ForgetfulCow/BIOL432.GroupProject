@@ -387,7 +387,7 @@ mk_distmat <- function(sum_abun_dat){
   sum_abun_dat <- sum_abun_dat %>% pivot_wider(names_from = DOY, values_from = SumAbun) # Rearrange the dataset so abundance data is arranged as separate DOY columns
   sum_abun_dat <- data.frame(sum_abun_dat) # Convert from grouped data to a regular data.frame object
   row.names(sum_abun_dat) <- sum_abun_dat$SpeciesID # Set the SpeciesIDs as the row names in the data.frame
-  sum_abun_dat <- sum_abun_dat %>% select(-SpeciesID, -TYPE) # Remove speciesID and habitat type from dataset so dist() can be run on it
+  sum_abun_dat <- sum_abun_dat %>% select(-SpeciesID, -TYPE) # Remove speciesID and habitat type from dataset so vegdist() can be run on it
   
   # Make the distance matrix:
   
@@ -670,7 +670,7 @@ Even though we log transformed the abundance data to reduce the importance of ex
   
   A third possibility combines the two previous hypotheses. It is possible that, while non-native ladybeetles are competitively dominant throughout most of the year, a seasonal, shared resource (such as a prey species) over which native species are competitively dominant emerges around ~2/3 of the way through the sampled season. Thus, native species would be excluded from annual habitat at all times except this single period, when they can better monopolize a specific shared resource.
   
-  Interestingly, during soybean aphid outbreak years (1999 - 2006), both native and non-native abundance increases during the time where they normally change reciprocally (*What specific time?*). This result lends support to the possibility of a shared resource; it is possible that aphids, an important prey source for all ladybeetle species analyzed here, emerge during this time. During outbreak years, aphids may have become so abundant that they stopped being a limiting resource, allowing both native and non-native ladybeetles to thrive.
+  Interestingly, during soybean aphid outbreak years (1999 - 2006), both native and non-native abundance increases during the time where they normally change reciprocally. This result lends support to the possibility of a shared resource; it is possible that aphids, an important prey source for all ladybeetle species analyzed here, emerge during this time. During outbreak years, aphids may have become so abundant that they stopped being a limiting resource, allowing both native and non-native ladybeetles to thrive.
 
 This study was able to build off of the results of previous researchers and provide a better understanding of how native and non-native ladybeetles coexist.  Understanding species-species interactions and abundance variation is important to understand how invasive ladybeetles impact native ladybeetles, which is crucial to properly managing their impact. Further research should examine interactions at a species level, which may deliver more concrete explanations of the patterns we observed. In addition, experimental work to determine dominance relationships among this system are required to determine whether changes in abundance are a result of competitive exclusion.
 
