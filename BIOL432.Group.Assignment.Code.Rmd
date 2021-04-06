@@ -29,9 +29,10 @@ Cameron MacPhail (20012451)
 ## Dataset Description 
   The dataset selected for this project was originally published by [Bahlai et al. (2014)](https://link-springer-com.proxy.queensu.ca/article/10.1007/s10530-014-0772-4#Sec2) and used data from a multi-year study conducted on a ladybeetle (Coccinellidae) community in southwestern Michigan. The study aimed to elucidate the mechanism behind the decline of native Coccinellidae species and generate potential conservation strategies. 
   Data were collected in southern Michigan on an experimental farm and forest area. Forest sampling began in 1993, so data before this time does not include the forest community classification. Adult coccinellids were captured using un-baited yellow sticky pads suspended in the air. As this sampling technique may be more efficient in some habitats than other habitats, we will focus our analysis within habitat types to minimize bias. The time period covered by this dataset includes several important ecological events, including the introduction of non-native competitors (alien coccinellid species) and prey (soybean aphids).
-	The first, second and third variables describe collection dates in the form of year; day, month and year (DD-Month-YYYY); and ordinal day of the year, respectively. The fourth variable describes how the plot was managed (e.g. conventional tilling, organic, etc.), if at all. The fifth variable records the habitat type (i.e. the plant community growing in the plot). This differs from the management treatment due to crop rotation. The sixth variable is the plant community classification (annual, perennial, or forest). The seventh variable is the plot replicate number. The eighth variable is the sample station number; there are five stations per plot. The ninth variable is the species ID; there are 13 species in total. Finally, the tenth variable describes the total number of adults captured in a subsample during a week. See Table 1 for a better understanding of the variables within the dataset.
-	Bahlai et al. (2014) concluded that the decreasing abundance of native Coccinellidae species was due to competitive exploitation driven by dietary overlap with alien Coccinellidae species. Our project will examine whether seasonal niche partitioning is occurring among and between native and non-native coccinellids.
-	
+	The first, second and third variables describe collection dates in the form of year; day, month and year (DD-Month-YYYY); and ordinal day of the year, respectively. The fourth variable describes how the plot was managed (e.g. conventional tilling, organic, etc.), if at all. The fifth variable records the habitat type (i.e. the plant community growing in the plot). This differs from the management treatment due to crop rotation. The sixth variable is the plant community classification (annual, perennial, or forest). The seventh variable is the plot replicate number. The eighth variable is the sample station number; there are five stations per plot. The ninth variable is the species ID; there are 13 species in total. Finally, the tenth variable describes the total number of adults captured in a subsample during a week. 
+	Bahlai et al. (2014) concluded that the decreasing abundance of native Coccinellidae species was largely restricted to only two native species and the remaining native species were found in stable abundances. The study found that competitive exploitation driven by dietary overlap with alien Coccinellidae species was the main reason for the decline of the two native species.
+Our project will examine whether seasonal niche partitioning is occurring among and between native and non-native coccinellids.
+
 There are 13 species of Ladybeetle documented in this study. 9 species are native, while the remaining 4 are non-native invase species. 
 
 
@@ -155,6 +156,14 @@ tail(dat)
 summary(dat) #view summary for each variable in dataset
 ```
 
+# Mean Adult abundance across the entire study
+```{r}
+dat %>% 
+  group_by(SpeciesID) %>% 
+  summarise(MeanAbundance = n())
+```
+The most common species caught over the duration of the study was the native species; Seven-spot ladybeetle (Coccinella septempunctata)  and Spotted Lady Beetle (Coleomegilla maculata) and non native specie; Harlequin/Asian ladybeetle (Harmonia axyridis). 
+
 ## Using Regex in Unix to change SpeciesID into modified scientific name
 
 The code chunk below creates a new csv file with the updated scientific names converted using regex expressions
@@ -272,7 +281,7 @@ ggplot(LadyBugData, aes(x = DOY, y = Adults)) +
 ```
 
 
-Clearly abundance does vary over time, but not necessarily exactly according to month. Let's examine how well this pattern holds for individual species as well as native vs non-native assemblages.
+Clearly abundance does vary over time, but not necessarily exactly according to month. Let's examine how well this pattern holds for native vs non-native assemblages.
 
 # Temporal abundance of native vs non-native ladybeetles
 
