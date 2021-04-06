@@ -690,13 +690,7 @@ Arjun:
   
   Using graphical analysis on adult abundance, we found that abundance changes with time for both native and non-native species, except for native species found in the forest habitat. Seasonal variation in abundance may reflect environmental changes. For example, activity levels of ladybeetles may vary with temperature, increasing or decreasing each species' risk of being trapped at different times of the year. This may explain seasonal differences in abundance in any one ladybeetle species, but is unlikely to account for reciprocal increases and decreases between native and non-native species.
   
-  Across the perennial and forest habitat, graphical analysis found little to no evidence for temporal niche partitioning between native and non-native ladybeetles. In contrast, cluster analysis indicates that temporal niche partitioning may occur in the perennial habitat during the final 2 time periods (1999 - 2006 and 2007 – 2012). NOT SURE WHAT TO CONCLUDE HERE: (Arjun and Amanda suggest the below:)
-  
-Arjun:
-  The cluster analysis may have captured temporal partitioning between non-native species and just a few native species. It is possible that the graph for these subsets did not capture changes in abundance for certain native species because all the native species were pooled together, so noise from other native species might have masked changes in abundance in a few native species.
-
-Amanda:
-  Further research may be needed to clarify whether temporal niche partitioning between native and non-native ladybeetles occurs in perennial habitats. 
+  Across the perennial and forest habitat, graphical analysis found little to no evidence for temporal niche partitioning between native and non-native ladybeetles. In contrast, cluster analysis indicates that temporal niche partitioning may occur in the perennial habitat during the final 2 time periods (1999 - 2006 and 2007 – 2012).The cluster analysis may have captured temporal partitioning between non-native species and just a few native species. It is possible that the graph for these subsets did not capture changes in abundance for certain native species because all the native species were pooled together, so noise from other native species might have masked changes in abundance in a few native species.Further research may be needed to clarify whether temporal niche partitioning between native and non-native ladybeetles occurs in perennial habitats. 
   
   
   
