@@ -7,7 +7,7 @@ output:
     toc: true
     number_section: true
     toc_float:
-      collapsed: false
+      collapsed: true
 ---
 
 # Project Info
@@ -27,11 +27,12 @@ Yudong Liu (20020036)
 Cameron MacPhail (20012451)
 
 ## Dataset Description 
-  The original dataset selected was published by [Bahlai et al. (2014)](https://link-springer-com.proxy.queensu.ca/article/10.1007/s10530-014-0772-4#Sec2) and used data from a multi-year study conducted on a ladybeetle (Coccinellidae) community in southwestern Michigan. The study aimed to elucidate the mechanism behind the decline of native Coccinellidae species and generate potential conservation strategies. 
+  The dataset selected for this project was originally published by [Bahlai et al. (2014)](https://link-springer-com.proxy.queensu.ca/article/10.1007/s10530-014-0772-4#Sec2) and used data from a multi-year study conducted on a ladybeetle (Coccinellidae) community in southwestern Michigan. The study aimed to elucidate the mechanism behind the decline of native Coccinellidae species and generate potential conservation strategies. 
   Data were collected in southern Michigan on an experimental farm and forest area. Forest sampling began in 1993, so data before this time does not include the forest community classification. Adult coccinellids were captured using un-baited yellow sticky pads suspended in the air. As this sampling technique may be more efficient in some habitats than other habitats, we will focus our analysis within habitat types to minimize bias. The time period covered by this dataset includes several important ecological events, including the introduction of non-native competitors (alien coccinellid species) and prey (soybean aphids).
-	The first, second and third variables describe collection dates in the form of year; day, month and year (DD-Month-YYYY); and ordinal day of the year, respectively. The fourth variable describes how the plot was managed (e.g. conventional tilling, organic, etc.), if at all. The fifth variable records the habitat type (i.e. the plant community growing in the plot). This differs from the management treatment due to crop rotation. The sixth variable is the plant community classification (annual, perennial, or forest). The seventh variable is the plot replicate number. The eighth variable is the sample station number; there are five stations per plot. The ninth variable is the species ID; there are 13 species in total. Finally, the tenth variable describes the total number of adults captured in a subsample during a week. See Table 1 for a better understanding of the variables within the dataset.
-	Bahlai et al. (2014) concluded that the decreasing abundance of native Coccinellidae species was due to competitive exploitation driven by dietary overlap with alien Coccinellidae species. Our project will examine whether seasonal niche partitioning is occurring among and between native and non-native coccinellids.
-	
+	The first, second and third variables describe collection dates in the form of year; day, month and year (DD-Month-YYYY); and ordinal day of the year, respectively. The fourth variable describes how the plot was managed (e.g. conventional tilling, organic, etc.), if at all. The fifth variable records the habitat type (i.e. the plant community growing in the plot). This differs from the management treatment due to crop rotation. The sixth variable is the plant community classification (annual, perennial, or forest). The seventh variable is the plot replicate number. The eighth variable is the sample station number; there are five stations per plot. The ninth variable is the species ID; there are 13 species in total. Finally, the tenth variable describes the total number of adults captured in a subsample during a week. 
+	Bahlai et al. (2014) concluded that the decreasing abundance of native Coccinellidae species was largely restricted to only two native species and the remaining native species were found in stable abundances. The study found that competitive exploitation driven by dietary overlap with alien Coccinellidae species was the main reason for the decline of the two native species.
+Our project will examine whether seasonal niche partitioning is occurring among and between native and non-native coccinellids.
+
 There are 13 species of Ladybeetle documented in this study. 9 species are native, while the remaining 4 are non-native invase species. 
 
 
@@ -96,29 +97,29 @@ There are 13 species of Ladybeetle documented in this study. 9 species are nativ
 
 1. Within sampling years, does native and non-native species abundance change according to the month?
 
-2. Is there temporal niche partitioning among native species and among non-native species? Is there temporal niche partitioning between native and non-native species?
+2. Is there temporal niche partitioning between native and non-native species?
 
-3. Is there a change in seasonal partitioning before and after invasive species arrive?
+3. Is there a change in temporal partitioning before and after invasive species arrive?
 
 \n 
 
 **Hypotheses for each question: ** 
 
-1. **H0**: Native and non-native species abundance does not change according to the month within sampling years. **H1**: Native and non-native species abundance does change according to the month within sampling years. We suspect that native and non-native species abundance will change according to month because abundance may be impacted by environmental factors that vary seasonally. 
+1. **H0**: Native and non-native species abundance does not change with time within sampling years. **H1**: Native and non-native species abundance does change with time within sampling years. We suspect that native and non-native species abundance will change with time because abundance may be impacted by environmental factors that vary throughout different stages of the growing season. 
 
-2. **H0**: There is not temporal niche partitioning among native species and among non-native species. There is not temporal niche partitioning between native and non-native species. **H1**: There is temporal niche partitioning among native species and among non-native species. There is temporal niche partitioning between native and non-native species. We suspect that there will be temporal niche partitioning because native and non-native species may compete. 
+2. **H0**:There is no temporal niche partitioning between native and non-native species. **H1**: There is temporal niche partitioning between native and non-native species. We suspect that there will be temporal niche partitioning because native and non-native species may compete with each other.
 
-3. **H0**: There is not a change in seasonal partitioning before and after invasive species arrive. **H1**: There is a change in seasonal partitioning before and after invasive species arrive. We suspect that there will be changes in seasonal partitioning before and after the arrival of invasive species (soybean aphids) because they may impact non-native and native species. 
+3. **H0**: There is no change in seasonal partitioning before and after invasive species arrive. **H1**: There is a change in seasonal partitioning before and after invasive species arrive. We suspect that there will be changes in seasonal partitioning before and after the arrival of non-native ladybeetles and invasive soybean aphids because they represent major potential influences on lady beetle community dynamics. The arrival of soybean aphids may benefit certain species more than others as food source, and the arrival of non-native ladybeetles may impact different ladybeetle species to different degrees.
 
 \n 
 
 **Predictions for each question:** 
 
-1. If native and non-native species abundance changes according to the month within sampling years, then graphs will may show monthly changes in species abundance and clusters may show changes in lady beetle communities according to month. 
+1. If native and non-native species abundance changes with time within sampling years, then graphs should show monthly changes in species abundance. 
 
-2. If there is temporal niche partitioning among native and non-native species, then graphs and community clusters may show that when one species has high abundance, then another species will have lower abundance. If there is temporal niche partitioning between native and non-native species, then graphs and community clusters may show that when non-native species have high abundance, then native species have low abundance and vice versa. 
+2. If there is temporal niche partitioning between native and non-native species, then graphs should show that when non-native species have high abundance, native species have low abundance and vice versa. Another way to see if there is temporal niche partitioning between native and non-native species is by clustering the species by their temporal patterns in abundance within sampling years. If there is differences between native and non-native temporal patterns of abundance within sampling years, then they should cluster separately on a tree.
 
-3. If there is a change in seasonal partitioning before and after invasive species (soybean aphids) arrive, then graphs and community clusters will show changes in temporal niche partitioning. For example, non-native species may be at a high abundance during a month when they were previously low abundance. 
+3. If there is a change in seasonal partitioning before and after non-native lady beetles and invasive soybean aphids arrive, then graphs will show changes in temporal niche partitioning. For example, non-native species may be at a high abundance during a particular month when they were previously low abundance, or more generally there might not be seasonal partitioning at all between native and non-native species in one time period but seasonal partitioning could be present in another time period. When clustering the species by their temporal patterns in abundance within sampling years, differences between time periods in the presence or absence of seasonal partitioning would be observed as the presence or absence of distinct native and non-native species clusters, respectively.
 
 
 [GitHub Repository Link](https://github.com/alexrow15/BIOL432.GroupProject)
@@ -134,6 +135,8 @@ library(cowplot)
 library(ape)
 library(ggtree)
 ```
+
+# Preliminary Data Processing
 
 ## Load Dataset
 ```{r}
@@ -224,13 +227,22 @@ tail(LadyBugData)
 summary(LadyBugData)
 ```
 
+## Create native and non-native groups in the dataset
+```{r}
+# Create another column in the dataset that assigns non-native species to the 'Non-native' group and assign all other species to the 'Native' group
+LadyBugData <- LadyBugData %>%
+  mutate(Species_type = ifelse(SpeciesID == "C. septempunctata" |
+                                 SpeciesID == "H. axyridis" |
+                                 SpeciesID == "H. variegata" |
+                                 SpeciesID == "P. quatuordecimpunctata",
+                               "Non-native", "Native"))
+```
+
 
 ## Custom Function for ggplot Theme
 
 This function will create a custom theme for our ggplots.
-```{r eval=FALSE} 
-# eval=FALSE is used in order to show code but not include long output generated
-
+```{r}
 theme_custom <- function () {
   # Using theme_minimal as a base. Will replace elements that we want to change.
   theme_minimal() %+replace% 
@@ -248,35 +260,56 @@ theme_custom <- function () {
 ```
 
 
-## Create native and non-native groups in the dataset
+# General temporal abundance patterns
+
+We plotted ladybeetle abundance against the day of the year to determine if abundance varies at all over time. We are displaying this data separately for each individual habitat type (annual, forest, perennial) because the sampling method used to capture the ladybeetles may have been more efficient in some habitats than other habitats.
 ```{r}
-# Create another column in the dataset that assigns non-native species to the 'Non-native' group and assign all other species to the 'Native' group
-LadyBugData <- LadyBugData %>%
-  mutate(Species_type = ifelse(SpeciesID == "C. septempunctata" |
-                                 SpeciesID == "H. axyridis" |
-                                 SpeciesID == "H. variegata" |
-                                 SpeciesID == "P. quatuordecimpunctata",
-                               "Non-native", "Native"))
+ggplot(LadyBugData, aes(x = DOY, y = Adults)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth() +
+  facet_wrap(~ TYPE) +
+  theme_custom()
 ```
 
-# Is there temporal niche partitioning among native species and among non-native species? Is there temporal niche partitioning between native and non-native species?
 
-## Make trees to cluster the species by differences in abundance by DOY
+Clearly abundance does vary over time, but not necessarily exactly according to month. Let's examine how well this pattern holds for native vs non-native assemblages.
 
-To determine if there is temporal niche partitioning between species, we first attempt to cluster the species by differences in abundance for each day of the year (DOY) (pooled across all years within a given time frame). The clustering method we chose was the neighbour-joining (NJ) tree method. We predict that this will reveal any differences in the temporal patterns of abundance between species. This does not tell us if species partition resources 'seasonally', i.e. the clusters will not reveal specific time periods when certain species become more abundant and other species become less abundant. However, the trees should indicate which species are similar to each other in terms of their temporal patterns of abundance and which are dissimilar.
+# Temporal abundance of native vs non-native ladybeetles
 
-*Maybe make a note that we tried NMDS, but decided it doesn't make sense*
-
-### Make a data.frame indicating the native/non-native status of each species
-
-Will need this later to colour code the species tree by native and non-native species to see if there are any clusters in abundance by DOY
-
+Plotting abundance w/ native and non-native groupings
 ```{r}
-# Select the species names and their corresponding status as native or non-native from the original dataset, and remove the duplicate rows using the distinct() function from dplyr
-SpeciesOrigin <- LadyBugData %>% select(SpeciesID, Species_type) %>% distinct()
+ggplot(LadyBugData, aes(x = DOY, y = Adults, colour = Species_type)) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  geom_smooth() +
+  facet_wrap(~ TYPE) +
+  theme_bw()
 ```
 
-### Plot histograms of the abundance data
+Non-native ladybeetles clearly have higher abundance throughout the entire year in most habitats. There doesn't seem to be strong patterns in forest habitat for native ladybeetles, but this might just be because they have such low abundance. Taking a look at abundance pre-invasion of the various exotic species should help show what's going on.
+
+\n
+
+Also, in annual crop habitats there seems to be a decline in non-native ladybeetle abundance and a concurrent increase in native ladybeetle abundance around 2/3 of the way through the year, lending support to our hypothesis of temporal niche partitioning.
+
+\n
+
+# Invasion time series temporal abundance patterns
+
+We are summarizing our findings here in a time series graph created using the cowplot package for concision. Code for the individual graphs and joining the graphs can be found in the "time_series_graphing.Rmd" file in the project folder.
+
+![A = 1989 - 1993, B = 1994 - 1998, C = 1999 - 2006, D = 2007 - 2012](./abundance_timeseries.png)
+
+Overall, native ladybeetle abundance is low compared to non-native species. In the early stages of invasion especially, the shoulder seasons seem to benefit native species. In addition, native species often reach peak abundance in annual habitat ~215 - 225 days into the year. In many cases, this increase in native species abundance corresponds with a decrease in non-native species abundance. This does not occur during the 1999-2006 period, however, possibly due to soybean aphid outbreaks during that time. For the most part in most habitats, however, native ladybeetle abundance do not seem to respond strongly to changes in non-native ladybeetle abundance.
+
+# Confirm the above findings by clustering the species by DOY abundances
+
+As an alternative way to test hypotheses 2 and 3 we sought to cluster the species based off patterns in their abundances over days of the year.
+
+To determine if there is temporal niche partitioning between species, we clustered the species by differences in abundance for each day of the year (DOY) (pooled across all years within a given time frame). The clustering method we chose was the neighbour-joining (NJ) tree method. We predicted that this would reveal any differences in the temporal patterns of abundance between species. This does not tell us if species partition resources 'seasonally', i.e. the clusters will not reveal specific time periods when certain species become more abundant and other species become less abundant. However, the trees should indicate which species are similar to each other and which are dissimilar in terms of their temporal patterns of abundance.
+
+## Plot histograms of the abundance data
 
 ```{r}
 # Plot counts for the raw abundance data (for each observation)
@@ -290,9 +323,9 @@ There is a wide range in abundances. It is possible that certain species might b
 LadyBugData %>% group_by(SpeciesID) %>% summarise(totalAbun = sum(Adults, na.rm = TRUE))
 ```
 
-Certain species are indeed far more common in the dataset than others. Log-transforming the dataset might allow us to de-emphasize the importance of highly abundant species so that rare species can have more influence in the analysis. This is especially important for comparing native and non-native species because two of the most abundant species in the dataset are non-native (*C. septempuncta* and *H. axyridis*). If raw abundance data is analyzed, the clusters in the trees might just reflect differences in abundance instead of differences in temporal patterns of abundance between species.
 
-- *Still, it's worth noting that the traps are more likely to catch the most abundant species, so the plots will still be biased towards finding differences between abundant and non-abundant species.* This is probably important to mention somewhere, probably in the discussion
+Certain species are indeed far more common in the dataset than others. Log-transforming the dataset might allow us to de-emphasize the importance of highly abundant species so that rare species can have more influence in the analysis. This is especially important for comparing native and non-native species because two of the most abundant species in the dataset are non-native (*C. septempuncta* and *H. axyridis*). If raw abundance data is analyzed, the clusters in the trees might just reflect differences in abundance rather than differences in temporal patterns of abundance between species.
+
 
 See how the distribution of abundances looks with different log transformations:
 ```{r}
@@ -315,7 +348,7 @@ ggplot(LadyBugData, aes(x=log((Adults + 1), base = 10), y=..count..)) +
   scale_x_continuous(name = "log10(Adults)")
 ```
 
-For the following analyses we chose to use a log5(x+1) transformation of the abundance data. Inreasing the log transformation to log15(x+1) had no effect on the topologies of the habitat-subsetted trees (including all years) below.
+For the following analyses we chose to use a log5(x+1) transformation of the abundance data. Increasing the log transformation to log5(x+1) had no effect on the topologies of the habitat-subsetted trees (including all years) below.
 
 For at least one tree (forest data, including all years), switching from log transformed data to the raw abundance data had little effect on the topology. It is interesting though that the only effect of switching to the raw abundance data is that 2 non-native species (*C. septempunctata* and *H. axyridis*) became closer to each other, probably reflecting their high abundance relative to most of the other species (data not shown).
 
@@ -324,6 +357,17 @@ For at least one tree (forest data, including all years), switching from log tra
 logTLadyBug <- LadyBugData %>%
   mutate(logTAdults = log((Adults + 1), base = 5)) %>%  # transform with log5
   select(-Adults) # Replace Adults with logTAdults
+```
+
+## Make trees to cluster the species by differences in abundance by DOY
+
+### Make a data.frame indicating the native/non-native status of each species
+
+Will need this later to colour-code the species trees by native and non-native species to see if there are any clusters in abundance by DOY
+
+```{r}
+# Select the species names and their corresponding status as native or non-native from the original dataset, and remove the duplicate rows using the distinct() function from dplyr
+SpeciesOrigin <- LadyBugData %>% select(SpeciesID, Species_type) %>% distinct()
 ```
 
 ### Custom Functions for Creating the Trees
@@ -380,6 +424,8 @@ mk_tree <- function(distmat, dat = SpeciesOrigin){
 
 ### Subset by habitat type
 
+The sampling technique used to capture adult  coccinellids may be more efficient in some habitats than other habitats (see methods of Bahlai et al. 2015), so we chose to focus our analysis within habitat types.
+
 There are 3 habitat types:
 
 - forest
@@ -411,10 +457,11 @@ forest.hMap <- p_dist(forest.dist)
 annual.hMap <- p_dist(annual.dist)
 perennial.hMap <- p_dist(perennial.dist)
 
-# Plot the heat maps for each habitat type subset together as a single figure
+# Plot the heat maps for each habitat type subset together as a single figure. A = forest; B = annual; C = perennial.
 plot_grid(forest.hMap, annual.hMap, perennial.hMap, labels = c("A", "B", "C"))
 ```
-Figure 1.
+
+
 
 ```{r fig.height=6, fig.width=12}
 # Make the trees
@@ -422,12 +469,18 @@ forest.pT <- mk_tree(forest.dist)
 annual.pT <- mk_tree(annual.dist)
 perennial.pT <- mk_tree(perennial.dist)
 
-# Plot the trees for each habitat type subset together as a single figure
+# Plot the trees for each habitat type subset together as a single figure. A = forest; B = annual; C = perennial.
 plot_grid(forest.pT, annual.pT, perennial.pT, labels = c("A", "B", "C"))
 ```
-Figure 2.
+There appears to be negligible differentiation between native and non-native species in forest habitats (A) and perennial habitats (C) in terms of their DOY abundance patterns.
+
+Annual habitats (B) show some association of non-native species with each other in their DOY abundance patterns, however there are also native species within the same cluster. Also, the distinction between the cluster that holds the non-native species and the cluster that contains most of other native species appears to be poorly resolved, as indicated by the short branch lengths near the root of the tree.
+
+Overall there seems to be little to no temporal partitioning between native and non-native ladybeetle species in any habitat, except for perhaps some weak temporal partitioning in annual habitat.
 
 ### Subset the habitat types by time period
+
+We chose to subset the data for each habitat type by different time periods to see if there was any ephemeral temporal partitioning between native and non-native species that may not have been captured by the analysis above, which looked at the entire time-span of the dataset. We predicted that there may be differences in temporal partitioning during different stages of the non-native ladybeetle invasion, which were defined by the number of non-native ladybeetles present in the study area. We also predicted that temporal partitioning might vary before and after the outbreak of invasive soybean aphids, as this could favour certain species more than others and alter the population dynamics of ladybeetle species in the study area.
 
 There are 4 time periods defined by the presence of non-native ladybeetles and soybean aphid outbreaks:
 
@@ -455,7 +508,7 @@ T3AbunSum <- T3 %>% group_by(DOY, SpeciesID, TYPE) %>% summarize(SumAbun = sum(l
 T4AbunSum <- T4 %>% group_by(DOY, SpeciesID, TYPE) %>% summarize(SumAbun = sum(logTAdults, na.rm = TRUE))
 
 # Subset the pooled abundance data for each time period by habitat type
-T1.F.AbunSum <- T1AbunSum %>% filter(TYPE == "forest") # This subset will not be analyzed. The forest site only started getting sampled in 1993. There are only 16 observations, and the pooled abundances are all 0 values, so it is not possible to see how the species cluster in DOY abundance.
+T1.F.AbunSum <- T1AbunSum %>% filter(TYPE == "forest") # This subset will not be analyzed. The forest site only started getting sampled in 1993. There are only 16 observations, and the pooled abundances are all 0 values (see the T1.F.AbunSum object), so it is not possible to see how the species cluster in DOY abundance.
 T1.A.AbunSum <- T1AbunSum %>% filter(TYPE == "annual")
 T1.P.AbunSum <- T1AbunSum %>% filter(TYPE == "perennial")
 
@@ -511,19 +564,21 @@ T4.P.hMap <- p_dist(T4.P.dist)
 Plot the heat maps by time period for each habitat type together as a single figure
 ```{r fig.height=7, fig.width=10}
 # Plot the heat maps for each time period in the forest habitat together as a single figure
-# Note that there was too little data for the forest habitat in the first time period do it is not analyzed.
+# Note that there was too little data for the forest habitat in the first time period so it is not plotted.
+# Forest habitat. A = 1994 - 1998; B = 1999 - 2006; C = 2007 - 2012.
 plot_grid(T2.F.hMap, T3.F.hMap, T4.F.hMap, labels = c("A", "B", "C"))
 ```
 
 
 ```{r fig.height=7, fig.width=10}
 # Plot the heat maps for each time period in the annual habitat together as a single figure
+# Annual habitat. A = 1989 - 1993; B = 1994 - 1998; C = 1999 - 2006; D = 2007 - 2012.
 plot_grid(T1.A.hMap, T2.A.hMap, T3.A.hMap, T4.A.hMap, labels = c("A", "B", "C", "D"))
 ```
 
-
 ```{r fig.height=7, fig.width=10}
 # Plot the heat maps for each time period in the perennial habitat together as a single figure
+# Perennial habitat. A = 1989 - 1993; B = 1994 - 1998; C = 1999 - 2006; D = 2007 - 2012.
 plot_grid(T1.P.hMap, T2.P.hMap, T3.P.hMap, T4.P.hMap, labels = c("A", "B", "C", "D"))
 ```
 
@@ -553,74 +608,89 @@ T4.P.tree <- mk_tree(T4.P.dist)
 
 ```{r fig.height=6, fig.width=12}
 # Plot the trees for each time period in the forest habitat together as a single figure
+# Forest habitat. A = 1999 - 2006; B = 2007 - 2012.
 plot_grid(T3.F.tree, T4.F.tree, labels = c("A", "B"))
 ```
 
+As noted in the comments in the code above, the 1989 - 1993 forest data could not be analyzed because no ladybeetles were observed in this habitat during that time period (see the T1.F.AbunSum object), and the 1994 - 1998 forest data could not be analyzed with a NJ tree because there was not enough distance information to construct the tree.
+
+There is no distinct clustering of native and non-native ladybeetle species in either the 1999 - 2006 (A) or the 2007 - 2012 (B) time periods for forest data. Both trees have a lot of polytomies, which suggests that the differences between species in their DOY abundance patterns are poorly resolved.
 
 ```{r fig.height=6, fig.width=12}
 # Plot the trees for each time period in the annual habitat together as a single figure
+# Annual habitat. A = 1989 - 1993; B = 1994 - 1998; C = 1999 - 2006; D = 2007 - 2012.
 plot_grid(T1.A.tree, T2.A.tree, T3.A.tree, T4.A.tree, labels = c("A", "B", "C", "D"))
+```
+
+In the 1989 - 1993 (A) and 1999 - 2006 (C) annual habitat data there is no clustering of native and non-native species. The 1999 - 2006 annual data appears at first glance to have a lot of native species that segregate separately from the non-native species, however these native species do not belong together in a common cluster and each of these native species has little to no records in this subset of the dataset (see code chunk below). This suggests that most of the native ladybeetles in this subset simply segregate separately from the non-native species because they are absent or nearly absent from the dataset.
+
+The other 2 time periods, 1994 - 1998 (B) and 2007 - 2012 (D), seem to show some segregation between native and non-native species on the tree. In both time periods however, there are one or two native species within the non-native species cluster.
+
+In annual habitats, these trees suggest that there was no temporal partitioning between native and non-native species in the 1989 - 1993 and 1999 - 2006 time periods, but they do suggest that there might be some partitioning between native and non-native species in the 1994 - 1998 and 2007 - 2012 time periods.
+
+```{r}
+# For annual habitat, 1999 - 2006 (C) subset, count the total amount of log-transformed abundances for each species
+# Notice that many of the native species that appear to segregate separately from the non-native species actually have little to no presence in this subset
+T3.A.AbunSum %>% group_by(SpeciesID) %>% summarise(tot = sum(SumAbun))
 ```
 
 
 ```{r fig.height=6, fig.width=12}
 # Plot the trees for each time period in the perennial habitat together as a single figure
+# Perennial habitat. A = 1989 - 1993; B = 1994 - 1998; C = 1999 - 2006; D = 2007 - 2012.
 plot_grid(T1.P.tree, T2.P.tree, T3.P.tree, T4.P.tree, labels = c("A", "B", "C", "D"))
 ```
 
-So there's a couple alternatives to clustering by trees:
+There is no distinct clustering of native and non-native ladybeetle species in the first two time periods for perennial habitat data. However, in the 1999 - 2006 (C) and 2007 - 2012 (D) time periods there does appear to be some segregation between native and non-native species. In 1999 - 2006 only *C. septempunctata* and *H. axyridis* segregate separately from the other species, while the third invasive species is in a separate cluster. In 2007 - 2012 all the non-native species are in the same cluster along with a couple native species.
 
-1. Try a PCoA plot to cluster the data instead (seemed to be suggested when I tried googling the warning "stress is (nearly) zero: you may have insufficient data"). If we do this, it'll be good to say why we didn't use NMDS. Downside is that we didn't cover it in class, so the prof and TAs might not like that?
+Overall, this suggests there may be some partitioning between native and non-native species in perennial habitat during the soybean aphid outbreaks.
 
-###### I think our way around this is to leave the current NMDS plots and code in our report and just dont run it - that way we can show we tried it but after research found a better fit method. 
+### Potential issues with clustering the species by DOY abundance
 
-2. If we still want to do NMDS: Build a distance matrix from a dataset more similar to what we did in class, with species compositions across the columns instead of DOY abundances. *The only issue is that we wouldn't be able to colour the tree or NMDS plot by native vs non-native* because we wouldn't be comparing individual species for differences in abundance patterns, instead each row in the dataset would represent species composition (which can't be classified as native or non-native). So it wouldn't tell us if there's temporal partitioning by DOY between species or native and non-native species, it would only tell us if there different times of year have distinct species compositions.
-
-
-> A final note for these tree analyses: I wonder if part of the differences between species on the tree might reflect differences in the dates each species was sampled (i.e if some species only have data recorded for certain parts of the year while other species have data recorded for other parts of the year then maybe the pairwise distances between them partly reflect that?). Perhaps we could do histograms for the distributions of observation dates for the different species to see if there's any major differences.
-
-> To possibily address the above point (not sure if it actully does), I tried replacing the NA values in the forest.specDOY object with 0s using the values_fill argument in the pivot_wider() function, but that didn't change the tree that was based off DOY abundances. However the tree built from YrDOY abundances did have it's topology changed when the NAs were switched to 0, but still there was little change in the overall pattern of Non-native plants being scattered throughout the tree (with only CSEPT and HAXY being reasonably close).
+Even though we log transformed the abundance data to reduce the importance of extremely abundant species on the clustering analysis, the clusters are still probably biased towards finding differences between abundant and non-abundant species because more abundant species are more likely to be caught by the traps and rare species are more likely to be missed.
 
 
-## General temporal abundance patterns
+# Conclusion
 
-We plotted ladybeetle abundance against the day of the year to determine if abundance varies at all over time. We are displaying this data separately for each individual habitat type (annual, forest, perennial) because the sampling method used to capture the ladybeetles may have been more efficient in some habitats than other habitats.
-```{r}
-ggplot(LadyBugData, aes(x = DOY, y = Adults)) +
-  scale_x_continuous(expand = c(0,0)) +
-  scale_y_continuous(expand = c(0,0)) +
-  geom_smooth() +
-  facet_wrap(~ TYPE) +
-  theme_bw()
-```
+We used graphical and tree clustering analysis to analyze a long-term detaset on ladybeetle abundance in order to determine how ladybeetle abundance changes seasonally and whether niche partitioning is occurring between native and non-native ladybeetles.
+
+  - Abundance generally changes seasonally in all habitats for both native and non-native species, except for native species in forest habitat
+
+  - In perennial and forest habitat, we see little to no evidence of niche partioning
+  
+  - In annual habitat, we see evidence of temporal niche partitioning ~2/3 of the way through the year, where there is a concurrent decline of non-native abundance and increase of native abundance
+  
+  - Niche partitioning and seasonal abundance patterns do seem to be affected by the introduction of non-native species, both competitors (other ladybeetles) and prey (aphids)
+        - Specifically, aphid outbreaks may "break" patterns of niche partitioning, potentially by stopping food from becoming a limiting resource
+              - In graph C of the time series, native and non-native species increase at the same time 2/3 of way through the year
+        - This may be due to changing patterns of competitive interactions resulting in plastic or evolutionary (unlikely) shifts in temporal activity
+                - *Note: If you guys have other alternative hypotheses, feel free to add them
 
 
-Clearly abundance does vary over time, but not necessarily exactly according to month. Let's examine how well this pattern holds for individual species as well as native vs non-native assemblages.
 
-## Temporal abundance of native vs non-native ladybeetles
+Arjun:
 
-Plotting abundance w/ native and non-native groupings
-```{r}
-ggplot(LadyBugData, aes(x = DOY, y = Adults, colour = Species_type)) +
-  scale_x_continuous(expand = c(0,0)) +
-  scale_y_continuous(expand = c(0,0)) +
-  geom_smooth() +
-  facet_wrap(~ TYPE) +
-  theme_bw()
-```
+- The trees corroborate the graphs' finding that for the most part, there is little to no temporal paritioning between native and non-native ladybeetle species
 
-Non-native ladybeetles clearly have higher abundance throughout the entire year in most habitats. There doesn't seem to be strong patterns in forest habitat for native ladybeetles, but this might just be because they have such low abundance. Taking a look at abundance pre-invasion of the various exotic species should help show what's going on.
+- The weak segregation between native and non-native species on the tree for annual habitats supports Cameron's finding of some temporal niche partitioning in annual habitats
 
-\n
+- the weak segregation between native and non-native species on the tree for annual habitats in the time periods of 1994 - 1998 and 2007 - 2012 corresponds with the weak recipricol increases and decreases of native and non-native species in the same subsets in the time-series graph
 
-Also, in annual crop habitats there seems to be a decline in non-native ladybeetle abundance and a concurrent increase in native ladybeetle abundance around 2/3 of the way through the year, lending support to our hypothesis of temporal niche partitioning.
+- the finding in the trees for perennial habitat during the final 2 time periods (1999 - 2006 and 2007 - 2012) of some support for temporal partitioning between native and non-native does not match Cameron's findings. On the time-series graphs, the abundance of native species is a flat line and does not change with time, suggesting no response to non-native ladybeetle abundance
 
-\n
+## Conclusion 
+  We used graphical and tree clustering analysis to analyze how ladybeetle abundance changes seasonally and whether niche partitioning is occurring between native and non-native ladybeetles.
+  
+  Using graphical analysis on adult abundance, we found that abundance changes with seasonality for both native and non-native species, except for native species found in the forest habitat. Seasonal variation in abundance may reflect environmental changes. For example, activity levels of ladybeetles may vary with temperature, increasing or decreasing each species risk of being trapped at different times of the year. This may explain seasonal differences in abundance of all ladybeetles, but does not account for differences between species. 
+  
+  Across the perennial and forest habitat, graphical analysis found little to no evidence for temporal niche partitioning between native and non-native ladybeetles. In contrast, cluster analysis indicates that niche partitioning may occur in the perennial habitat during the final 2 time periods (1999 - 2006 and 2007 – 2012). NOT SURE WHAT TO CONCLUDE HERE 
+  
+  Within the annual habitat, which is a rotating monoculture, evidence for temporal niche partitioning was found using both techniques. Varying native and non-native species abundance in indicates temporal niche partitioning ~2/3 of the way through the year, where there is a concurrent decline of non-native abundance and increase of native abundance. Using cluster analysis, the weak segregation between native and non-native species on the tree for annual habitats in the time periods of 1994 - 1998 and 2007 - 2012 corresponds with the weak reciprocal increases and decreases in the same subsets in the abundance graph. It is interesting to note that niche partitioning only appears to occur during a limited time throughout the year. These results suggest that species-species interactions and competitive exclusion only influences abundance at a certain time of year. Food preference and availability may overlap during this period of time and increase species-species interactions. 
 
-## Invasion time series temporal abundance patterns
+This study was able to build off of the results of previous researchers and provide a better understanding of how native and non-native ladybeetles coexist.  Understanding species-species interactions and abundance variation is important in order to properly manage invasive ladybeetles. 
 
-We are summarizing our findings here in a time series graph created using the cowplot package for concision. Code for the individual graphs and joining the graphs can be found in the "time_series_graphing.Rmd" file in the project folder.
 
-![A = 1989 - 1993, B = 1994 - 1998, C = 1999 - 2006, D = 2007 - 2012](./abundance_timeseries.png)
-
-Overall, native ladybeetle abundance is low compared to non-native species. In the early stages of invasion especially, the shoulder seasons seem to benefit native species. In addition, native species often reach peak abundance in annual habitat ~215 - 225 days into the year. In many cases, this increase in native species abundance corresponds with a decrease in non-native species abundance. This does not occur during the 1999-2006 period, however, possibly due to soybean aphid outbreaks during that time. For the most part in most habitats, however, native ladybeetle abundance do not seem to respond strongly to changes in non-native ladybeetle abundance.
+Putting all the findings together:
+(1)	Abundance does appear to vary with seasonality
+(2)	Some evidence for temporal niche partitioning in annual habitats when data is analyzed using abundance graphs and cluster analysis. Cluster analysis indicates that niche partitioning may occur in the perennial habitat during the final 2 time periods (1999 - 2006 and 2007 - 2012), but the same result is not found using graphical analysis.
+(3)	Invasive species (aphids) increased the abundance of native and non-native species
