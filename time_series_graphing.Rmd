@@ -205,7 +205,7 @@ ggplot(logTLadyBug, aes(x = DOY, y = logTAdults, colour = Species_type)) +
 
 ## Pre-invasion temporal abundance patterns
 
-1989 - 1993: one non-native ladybeetles
+1989 - 1993: one non-native ladybeetle
 ```{r}
 logTLadyBug %>%
   filter(Year == c(1989:1993), TYPE != "forest") %>% # Filter the desired years and remove forest logTLadyBuga (forest site only started getting sampled in 1993, so there is not enough logTLadyBuga for this time frame)
@@ -228,8 +228,6 @@ logTLadyBug %>%
   facet_wrap(~ TYPE) +
   theme_custom()
 ```
-
-
 
 
 1999 - 2006: three non-native ladybeetles + soybean aphid outbreaks
