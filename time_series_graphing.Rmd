@@ -50,14 +50,17 @@ The dates loaded in correctly, which is good.
 
 ## General temporal abundance patterns
 
-Plot ladybeetle abundance against the day of the year to determine if abundance varies at all over time. Display this data separately for each individual habitat type (annual, forest, perennial) because the sampling method used to capture the ladybeetles may have been more efficient in some habitats than other habitats *(find Bahlai et al 2013 and cite it)*.
+Plot ladybeetle abundance against the day of the year to determine if abundance varies at all over time. Display this data separately for each individual habitat type (annual, forest, perennial) because the sampling method used to capture the ladybeetles may have been more efficient in some habitats than other habitats [Bahlai et al. (2015)](https://link-springer-com.proxy.queensu.ca/article/10.1007/s10530-014-0772-4#Sec2).
 ```{r}
+png(filename = "Q1_Abundance.png", width = 10, height = 5,
+    units = "in", bg = "transparent", res = 300)
 ggplot(dat, aes(x = DOY, y = Adults)) +
   scale_x_continuous(expand = c(0,0)) +
   scale_y_continuous(expand = c(0,0)) +
   geom_smooth() +
   facet_wrap(~ TYPE) +
   theme_custom()
+dev.off()
 ```
 
 
@@ -77,12 +80,15 @@ dat <- dat %>%
 
 Plotting abundance w/ native and non-native groupings
 ```{r}
+png(filename = "Q2_Partitioning.png", width = 7, height = 5,
+    units = "in", bg = "transparent", res = 300)
 ggplot(dat, aes(x = DOY, y = Adults, colour = Species_type)) +
   scale_x_continuous(expand = c(0,0)) +
   scale_y_continuous(expand = c(0,0)) +
   geom_smooth(method = "gam") +
   facet_wrap(~ TYPE) +
   theme_custom()
+dev.off()
 ```
 
 Non-native ladybeetles clearly have higher abundance throughout the entire year in most habitats. There doesn't seem to be strong patterns in forest habitat for native ladybeetles, but this might just be because they have such low abundance. Taking a look at abundance pre-invasion of the various exotic species should help show what's going on.

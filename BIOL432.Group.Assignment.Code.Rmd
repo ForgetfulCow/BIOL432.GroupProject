@@ -98,7 +98,7 @@ Bahlai, C. A., M. Colunga-Garcia, S. H. Gage, and D. A. Landis. 2015. The role o
 
 **We seek to address the following questions:**
 
-1. Within sampling years, does native and non-native species abundance change according to the month?
+1. Within sampling years, does native and non-native species abundance change according to season?
 
 2. Is there temporal niche partitioning between native and non-native species?
 
@@ -122,7 +122,7 @@ Bahlai, C. A., M. Colunga-Garcia, S. H. Gage, and D. A. Landis. 2015. The role o
 
 2. If there is temporal niche partitioning between native and non-native species, then graphs should show that when non-native species have high abundance, native species have low abundance and vice versa. Another way to see if there is temporal niche partitioning between native and non-native species is by clustering the species by their temporal patterns in abundance within sampling years. If there is differences between native and non-native temporal patterns of abundance within sampling years, then they should cluster separately on a tree.
 
-3. If there is a change in seasonal partitioning before and after non-native lady beetles and invasive soybean aphids arrive, then graphs will show changes in temporal niche partitioning. For example, non-native species may be at a high abundance during a particular month when they were previously low abundance, or more generally there might not be seasonal partitioning at all between native and non-native species in one time period but seasonal partitioning could be present in another time period. When clustering the species by their temporal patterns in abundance within sampling years, differences between time periods in the presence or absence of seasonal partitioning would be observed as the presence or absence of distinct native and non-native species clusters, respectively.
+3. If there is a change in seasonal partitioning before and after non-native lady beetles and invasive soybean aphids arrive, then graphs will show changes in temporal niche partitioning. For example, non-native species may be at a high abundance during a particular season when they were previously low abundance, or more generally there might not be seasonal partitioning at all between native and non-native species in one time period but seasonal partitioning could be present in another time period. When clustering the species by their temporal patterns in abundance within sampling years, differences between time periods in the presence or absence of seasonal partitioning would be observed as the presence or absence of distinct native and non-native species clusters, respectively.
 
 
 [GitHub Repository Link](https://github.com/alexrow15/BIOL432.GroupProject)
