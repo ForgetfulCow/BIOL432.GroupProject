@@ -98,7 +98,7 @@ Bahlai, C. A., M. Colunga-Garcia, S. H. Gage, and D. A. Landis. 2015. The role o
 
 **We seek to address the following questions:**
 
-1. Within sampling years, does native and non-native species abundance change according to the month?
+1. Within sampling years, does native and non-native species abundance change according to season?
 
 2. Is there temporal niche partitioning between native and non-native species?
 
@@ -122,7 +122,7 @@ Bahlai, C. A., M. Colunga-Garcia, S. H. Gage, and D. A. Landis. 2015. The role o
 
 2. If there is temporal niche partitioning between native and non-native species, then graphs should show that when non-native species have high abundance, native species have low abundance and vice versa. Another way to see if there is temporal niche partitioning between native and non-native species is by clustering the species by their temporal patterns in abundance within sampling years. If there is differences between native and non-native temporal patterns of abundance within sampling years, then they should cluster separately on a tree.
 
-3. If there is a change in seasonal partitioning before and after non-native lady beetles and invasive soybean aphids arrive, then graphs will show changes in temporal niche partitioning. For example, non-native species may be at a high abundance during a particular month when they were previously low abundance, or more generally there might not be seasonal partitioning at all between native and non-native species in one time period but seasonal partitioning could be present in another time period. When clustering the species by their temporal patterns in abundance within sampling years, differences between time periods in the presence or absence of seasonal partitioning would be observed as the presence or absence of distinct native and non-native species clusters, respectively.
+3. If there is a change in seasonal partitioning before and after non-native lady beetles and invasive soybean aphids arrive, then graphs will show changes in temporal niche partitioning. For example, non-native species may be at a high abundance during a particular season when they were previously low abundance, or more generally there might not be seasonal partitioning at all between native and non-native species in one time period but seasonal partitioning could be present in another time period. When clustering the species by their temporal patterns in abundance within sampling years, differences between time periods in the presence or absence of seasonal partitioning would be observed as the presence or absence of distinct native and non-native species clusters, respectively.
 
 
 [GitHub Repository Link](https://github.com/alexrow15/BIOL432.GroupProject)
@@ -311,7 +311,7 @@ Overall, native ladybeetle abundance is low compared to non-native species. In t
 
 As an alternative way to test hypotheses 2 and 3 we sought to cluster the species based off patterns in their abundances over days of the year.
 
-To determine if there is temporal niche partitioning between species, we clustered the species by differences in abundance for each day of the year (DOY) (pooled across all years within a given time frame). The clustering method we chose was the neighbour-joining (NJ) tree method. We predicted that this would reveal any differences in the temporal patterns of abundance between species. This does not tell us if species partition resources 'seasonally', i.e. the clusters will not reveal specific time periods when certain species become more abundant and other species become less abundant. However, the trees should indicate which species are similar to each other and which are dissimilar in terms of their temporal patterns of abundance.
+To determine if there is temporal niche partitioning between species, we clustered the species by differences in abundance for each day of the year (DOY) (pooled across all years within a given time frame). The clustering method we chose was the neighbour-joining (NJ) tree method. We predicted that this would reveal any differences in the temporal patterns of abundance between native and non-native species. This does not tell us if species partition resources 'seasonally', i.e. the clusters will not reveal specific time periods when certain species become more abundant and other species become less abundant. However, the trees should indicate which species are similar to each other and which are dissimilar in terms of their temporal patterns of abundance.
 
 ## Plot histograms of the abundance data
 
@@ -387,7 +387,7 @@ mk_distmat <- function(sum_abun_dat){
   sum_abun_dat <- sum_abun_dat %>% pivot_wider(names_from = DOY, values_from = SumAbun) # Rearrange the dataset so abundance data is arranged as separate DOY columns
   sum_abun_dat <- data.frame(sum_abun_dat) # Convert from grouped data to a regular data.frame object
   row.names(sum_abun_dat) <- sum_abun_dat$SpeciesID # Set the SpeciesIDs as the row names in the data.frame
-  sum_abun_dat <- sum_abun_dat %>% select(-SpeciesID, -TYPE) # Remove speciesID and habitat type from dataset so dist() can be run on it
+  sum_abun_dat <- sum_abun_dat %>% select(-SpeciesID, -TYPE) # Remove speciesID and habitat type from dataset so vegdist() can be run on it
   
   # Make the distance matrix:
   
@@ -670,7 +670,7 @@ Even though we log transformed the abundance data to reduce the importance of ex
   
   A third possibility combines the two previous hypotheses. It is possible that, while non-native ladybeetles are competitively dominant throughout most of the year, a seasonal, shared resource (such as a prey species) over which native species are competitively dominant emerges around ~2/3 of the way through the sampled season. Thus, native species would be excluded from annual habitat at all times except this single period, when they can better monopolize a specific shared resource.
   
-  Interestingly, during soybean aphid outbreak years (1999 - 2006), both native and non-native abundance increases during the time where they normally change reciprocally (*What specific time?*). This result lends support to the possibility of a shared resource; it is possible that aphids, an important prey source for all ladybeetle species analyzed here, emerge during this time. During outbreak years, aphids may have become so abundant that they stopped being a limiting resource, allowing both native and non-native ladybeetles to thrive.
+  Interestingly, during soybean aphid outbreak years (1999 - 2006), both native and non-native abundance increases during the time where they normally change reciprocally. This result lends support to the possibility of a shared resource; it is possible that aphids, an important prey source for all ladybeetle species analyzed here, emerge during this time. During outbreak years, aphids may have become so abundant that they stopped being a limiting resource, allowing both native and non-native ladybeetles to thrive.
 
 This study was able to build off of the results of previous researchers and provide a better understanding of how native and non-native ladybeetles coexist.  Understanding species-species interactions and abundance variation is important to understand how invasive ladybeetles impact native ladybeetles, which is crucial to properly managing their impact. Further research should examine interactions at a species level, which may deliver more concrete explanations of the patterns we observed. In addition, experimental work to determine dominance relationships among this system are required to determine whether changes in abundance are a result of competitive exclusion.
 
