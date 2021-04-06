@@ -299,7 +299,7 @@ Also, in annual crop habitats there seems to be a decline in non-native ladybeet
 
 We are summarizing our findings here in a time series graph created using the cowplot package for concision. Code for the individual graphs and joining the graphs can be found in the "time_series_graphing.Rmd" file in the project folder.
 
-![A = 1989 - 1993, B = 1994 - 1998, C = 1999 - 2006, D = 2007 - 2012](./abundance_timeseries.png)
+![A = 1989 - 1993: one non-native ladybeetle, 1994 - 1998: two non-native ladybeetles, C = 1999 - 2006: three non-native ladybeetles + soybean aphid outbreaks, D = 2007 - 2012: four non-native ladybeetles + soybean aphids present](./abundance_timeseries.png)
 
 Overall, native ladybeetle abundance is low compared to non-native species. In the early stages of invasion especially, the shoulder seasons seem to benefit native species. In addition, native species often reach peak abundance in annual habitat ~215 - 225 days into the year. In many cases, this increase in native species abundance corresponds with a decrease in non-native species abundance. This does not occur during the 1999-2006 period, however, possibly due to soybean aphid outbreaks during that time. For the most part in most habitats, however, native ladybeetle abundance do not seem to respond strongly to changes in non-native ladybeetle abundance.
 
