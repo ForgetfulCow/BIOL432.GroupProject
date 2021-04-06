@@ -650,6 +650,21 @@ Even though we log transformed the abundance data to reduce the importance of ex
 
 # Conclusion
 
+We used graphical and tree clustering analysis to analyze a long-term detaset on ladybeetle abundance in order to determine how ladybeetle abundance changes seasonally and whether niche partitioning is occurring between native and non-native ladybeetles.
+
+  - Abundance generally changes seasonally in all habitats for both native and non-native species, except for native species in forest habitat
+
+  - In perennial and forest habitat, we see little to no evidence of niche partioning
+  
+  - In annual habitat, we see evidence of temporal niche partitioning ~2/3 of the way through the year, where there is a concurrent decline of non-native abundance and increase of native abundance
+  
+  - Niche partitioning and seasonal abundance patterns do seem to be affected by the introduction of non-native species, both competitors (other ladybeetles) and prey (aphids)
+        - Specifically, aphid outbreaks may "break" patterns of niche partitioning, potentially by stopping food from becoming a limiting resource
+              - In graph C of the time series, native and non-native species increase at the same time 2/3 of way through the year
+        - This may be due to changing patterns of competitive interactions resulting in plastic or evolutionary (unlikely) shifts in temporal activity
+                - *Note: If you guys have other alternative hypotheses, feel free to add them
+
+
 
 Arjun:
 
